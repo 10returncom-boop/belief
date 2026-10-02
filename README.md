@@ -87,3 +87,16 @@
 ## 開啟方式
 
 直接用瀏覽器開啟本資料夾內的 `bible_v2_整合互動版.html`（需與 `assets/` 資料夾同層以載入經文資料）。
+
+## Favicon 與 PWA／完整網站功能（v3 補齊）
+
+- **Favicon**：`favicon.svg`（向量）、`favicon-32.png`、`favicon.ico`、`apple-touch-icon.png`（Apple 主畫面），navy 圓角＋金色十字與打開的聖經書卷；`head` 已掛 `<link rel="icon">` 多版本。可重新生成：`python make_icons.py`。
+- **PWA（可安裝、離線）**：`manifest.json`（名稱／theme_color `#1f2a44`／背景 `#f6f1e6`／192+512 圖示）＋ `sw.js`（快取 app shell，含 `assets/bible_text.js`，同源離線退回首頁）。註冊僅在 `https`／`localhost` 生效（GitHub Pages 即可用）；本機 `file://` 不會註冊。
+- **SEO／社群**：`keywords`、`author`、`theme-color`、Open Graph（og:title/description/image/type/locale）與 Twitter Card meta。
+- **動態頁面標題**：隨章節／文章／檢視自動更新 `document.title`（如「創世記 第1章｜聖經Bible」）。
+- **閱讀進度條**：頂端金色漸層細條，隨捲動顯示閱讀進度。
+- **分享**：章節與文章支援 Web Share API（行動裝置原生分享），不支援時退回複製文字。
+- **列印**：章節與文章皆可列印，`@media print` 僅輸出內容區、隱藏側欄／頂欄／浮動導覽。
+- **字級記憶**：閱讀器字級（`changeFont`）寫入 `localStorage("bible_font")`，重訪仍沿用。
+
+> 註：`og:image` 現為相對路徑 `favicon-512.png`；若上線 GitHub Pages 建議改為絕對網址以利社群抓取。
