@@ -1,0 +1,925 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8"><!-- meta-utf8 -->
+<meta name="viewport" content="width=device-width, initial-scale=1.0"><!-- meta-viewport -->
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="theme-color" content="#92400e"><!-- theme-color -->
+<meta name="description" content="菩提道次第廣論學習網站 — 宗喀巴大師造、法尊法師譯。三士道架構、三主要道、傳承時間軸、道次第儀表板、法語、研討班報名。">
+<meta name="keywords" content="菩提道次第廣論,廣論,宗喀巴,道次第,三士道,出離心,菩提心,空正見,福智,研討班,四家合註">
+<link rel="canonical" href="https://example.com/lamrim/"><!-- canonical -->
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>☸️</text></svg>"><!-- favicon -->
+<link rel="apple-touch-icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>☸️</text></svg>">
+<title>菩提道次第廣論 · 學習網 | Lamrim Study</title>
+<style>
+/* ============ Design Tokens（佛法莊嚴暖色）============ */
+:root{
+  --c-primary:#92400e; --c-primary-2:#b45309; --c-accent:#0f766e; --c-gold:#d97706;
+  --c-bg:#fdf8f0; --c-surface:#fffdf8; --c-surface-2:#f5ecdb;
+  --c-text:#2d1f0f; --c-text-2:#5c4a35; --c-text-3:#9a8468;
+  --c-border:#e8d9bf; --c-danger:#b91c1c; --c-success:#15803d; --c-warn:#d97706;
+  --radius:14px; --radius-sm:8px;
+  --shadow:0 4px 20px rgba(146,64,14,.08); --shadow-lg:0 14px 44px rgba(146,64,14,.16);
+  --nav-h:64px; --sidebar-w:300px;
+  --serif:"Noto Serif TC","Songti TC","PMingLiU",serif;
+  --sans:"Noto Sans TC","PingFang TC","Microsoft JhengHei",system-ui,sans-serif;
+}
+[data-theme="dark"]{
+  --c-bg:#1a130b; --c-surface:#241a10; --c-surface-2:#322416;
+  --c-text:#f3e7d0; --c-text-2:#d4c09a; --c-text-3:#8a7355; --c-border:#4a3826;
+  --shadow:0 4px 20px rgba(0,0,0,.5); --shadow-lg:0 14px 44px rgba(0,0,0,.7);
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth;scroll-padding-top:calc(var(--nav-h) + 16px)}
+body{font-family:var(--sans);background:var(--c-bg);color:var(--c-text);line-height:1.8;transition:background .3s,color .3s}
+a{color:var(--c-primary);text-decoration:none}
+img{max-width:100%}
+button{font-family:inherit;cursor:pointer}
+h1,h2,h3,.serif{font-family:var(--serif)}
+::selection{background:var(--c-gold);color:#fff}
+
+/* ============ Sticky Top-Nav / Header ============ */
+.top-nav{position:sticky;top:0;z-index:1000;height:var(--nav-h);background:linear-gradient(135deg,var(--c-primary),var(--c-primary-2));color:#fff;display:flex;align-items:center;padding:0 22px;box-shadow:var(--shadow);gap:14px}
+.brand{font-family:var(--serif);font-weight:700;font-size:1.15rem;display:flex;align-items:center;gap:10px;white-space:nowrap}
+.brand .logo{width:38px;height:38px;background:rgba(255,255,255,.18);border-radius:50%;display:grid;place-items:center;font-size:20px}
+.nav-links{display:flex;gap:2px;margin-left:auto;align-items:center}
+.nav-links a{color:rgba(255,255,255,.92);padding:8px 15px;border-radius:8px;font-size:.92rem;transition:.2s}
+.nav-links a:hover,.nav-links a.active{background:rgba(255,255,255,.18);color:#fff}
+.nav-tools{display:flex;gap:6px}
+.icon-btn{background:rgba(255,255,255,.15);border:none;color:#fff;width:38px;height:38px;border-radius:50%;display:grid;place-items:center;font-size:16px;transition:.2s}
+.icon-btn:hover{background:rgba(255,255,255,.3);transform:scale(1.08)}
+.hamburger{display:none;background:rgba(255,255,255,.15);border:none;color:#fff;width:38px;height:38px;border-radius:8px;flex-direction:column;justify-content:center;align-items:center;gap:4px}
+.hamburger span{display:block;width:18px;height:2px;background:#fff;border-radius:2px;transition:.3s}
+.hamburger.open span:nth-child(1){transform:translateY(6px) rotate(45deg)}
+.hamburger.open span:nth-child(2){opacity:0}
+.hamburger.open span:nth-child(3){transform:translateY(-6px) rotate(-45deg)}
+.mobile-menu{position:fixed;inset:var(--nav-h) 0 0 0;background:var(--c-bg);z-index:999;overflow-y:auto;transform:translateX(-100%);transition:transform .3s;padding:20px;display:none}
+.mobile-menu.open{transform:translateX(0)}
+.mobile-menu a{display:block;padding:12px;color:var(--c-text);border-radius:8px}
+.mobile-menu a:hover{background:var(--c-surface-2)}
+
+/* ============ Shell + Sidebar ============ */
+.shell{display:flex;min-height:calc(100vh - var(--nav-h))}
+.sidebar{width:var(--sidebar-w);background:var(--c-surface);border-right:1px solid var(--c-border);position:sticky;top:var(--nav-h);height:calc(100vh - var(--nav-h));overflow-y:auto;padding:20px 0;flex-shrink:0}
+.side-search{padding:0 18px 12px}
+.side-search input{width:100%;padding:9px 12px;border:1px solid var(--c-border);border-radius:8px;background:var(--c-surface-2);color:var(--c-text);font-size:.85rem}
+.side-group{margin-bottom:6px}
+.side-group-title{padding:10px 20px 6px;font-size:.72rem;font-weight:700;letter-spacing:.12em;color:var(--c-text-3);font-family:var(--serif)}
+.side-link{display:flex;align-items:center;gap:8px;padding:8px 20px;color:var(--c-text-2);font-size:.9rem;border-left:3px solid transparent;transition:.15s}
+.side-link:hover{background:var(--c-surface-2);color:var(--c-text)}
+.side-link.active{border-left-color:var(--c-gold);background:color-mix(in srgb,var(--c-gold) 10%,transparent);color:var(--c-primary);font-weight:600}
+.side-sub{padding-left:40px;font-size:.84rem}
+.main{flex:1;padding:30px;min-width:0;max-width:920px}
+
+/* ============ Hero ============ */
+.hero{text-align:center;padding:48px 24px 40px;background:
+  radial-gradient(circle at 20% 20%,color-mix(in srgb,var(--c-gold) 12%,transparent),transparent 50%),
+  radial-gradient(circle at 80% 80%,color-mix(in srgb,var(--c-accent) 10%,transparent),transparent 50%),
+  var(--c-surface);border:1px solid var(--c-border);border-radius:var(--radius);margin-bottom:28px;position:relative;overflow:hidden}
+.hero .dharma{font-size:52px;margin-bottom:10px;filter:drop-shadow(0 4px 12px rgba(217,119,6,.3))}
+.hero h1{font-size:2.2rem;letter-spacing:.15em;margin-bottom:6px;color:var(--c-primary)}
+.hero .sub{font-family:var(--serif);color:var(--c-text-2);font-size:1.05rem;letter-spacing:.2em}
+.hero .ornament{color:var(--c-gold);margin:14px 0;letter-spacing:1em}
+.hero p{max-width:640px;margin:0 auto;color:var(--c-text-2);font-size:.95rem}
+.hero .badges{display:flex;gap:8px;justify-content:center;margin-top:18px;flex-wrap:wrap}
+.hero .badge{background:color-mix(in srgb,var(--c-gold) 14%,transparent);color:var(--c-primary);padding:5px 14px;border-radius:20px;font-size:.78rem;font-weight:600}
+
+/* ============ Breadcrumb ============ */
+.breadcrumb{display:flex;align-items:center;gap:8px;font-size:.85rem;color:var(--c-text-3);margin-bottom:22px;flex-wrap:wrap}
+.breadcrumb a{color:var(--c-text-2)}
+.breadcrumb a:hover{color:var(--c-primary)}
+.breadcrumb .current{color:var(--c-primary);font-weight:600}
+
+/* ============ Section ============ */
+.section{background:var(--c-surface);border:1px solid var(--c-border);border-radius:var(--radius);margin-bottom:24px;overflow:hidden;scroll-margin-top:84px}
+.section-head{padding:20px 26px;border-bottom:1px solid var(--c-border);display:flex;align-items:baseline;gap:12px;flex-wrap:wrap}
+.section-head .num{color:var(--c-gold);font-family:var(--serif);font-size:.85rem;font-weight:700}
+.section-head h2{font-size:1.35rem;color:var(--c-primary);flex:1}
+.section-head .en{font-size:.78rem;color:var(--c-text-3);font-family:var(--sans)}
+.section-body{padding:26px}
+.lead{font-size:1rem;color:var(--c-text-2);margin-bottom:16px}
+.lead strong{color:var(--c-primary)}
+.verse{background:var(--c-surface-2);border-left:4px solid var(--c-gold);padding:18px 22px;border-radius:0 var(--radius-sm) var(--radius-sm) 0;margin:16px 0;font-family:var(--serif);font-size:1.02rem;color:var(--c-text);line-height:2}
+.verse .src{display:block;margin-top:8px;font-size:.8rem;color:var(--c-text-3);font-family:var(--sans)}
+
+/* ============ Accordion ============ */
+.accordion{border:1px solid var(--c-border);border-radius:var(--radius-sm);overflow:hidden}
+.acc-item{border-bottom:1px solid var(--c-border)}
+.acc-item:last-child{border-bottom:none}
+.acc-header{width:100%;background:var(--c-surface);padding:15px 20px;text-align:left;font-size:.95rem;font-weight:600;color:var(--c-text);display:flex;justify-content:space-between;align-items:center;border:none}
+.acc-header:hover{background:var(--c-surface-2)}
+.acc-header .chev{transition:.3s;color:var(--c-gold)}
+.acc-item.open .chev{transform:rotate(180deg)}
+.acc-body{max-height:0;overflow:hidden;transition:max-height .35s}
+.acc-body-inner{padding:16px 20px;color:var(--c-text-2);font-size:.92rem;background:var(--c-surface-2)}
+
+/* ============ Tabs ============ */
+.tabs{border:1px solid var(--c-border);border-radius:var(--radius-sm);overflow:hidden}
+.tab-nav{display:flex;background:var(--c-surface-2);border-bottom:2px solid var(--c-border)}
+.tab-btn{flex:1;padding:16px 10px;background:none;border:none;color:var(--c-text-2);font-family:var(--serif);font-size:1rem;border-bottom:3px solid transparent;transition:.2s;font-weight:600}
+.tab-btn:hover{color:var(--c-primary)}
+.tab-btn.active{color:var(--c-primary);border-bottom-color:var(--c-gold);background:var(--c-surface)}
+.tab-panel{display:none;padding:24px}
+.tab-panel.active{display:block}
+.tab-panel h3{color:var(--c-primary);margin-bottom:10px;font-size:1.15rem}
+.tab-panel p{color:var(--c-text-2);margin-bottom:12px;font-size:.95rem}
+.three-pillars{display:flex;gap:10px;flex-wrap:wrap;margin-top:14px}
+.pillar{flex:1;min-width:140px;padding:14px;border-radius:var(--radius-sm);text-align:center}
+.pillar .p-ico{font-size:26px}
+.pillar .p-name{font-weight:700;margin:6px 0 2px;font-family:var(--serif)}
+.pillar .p-desc{font-size:.78rem;color:var(--c-text-2)}
+.p1{background:color-mix(in srgb,#d97706 10%,transparent)}.p2{background:color-mix(in srgb,#0f766e 10%,transparent)}.p3{background:color-mix(in srgb,#92400e 12%,transparent)}
+
+/* ============ Dropdown Menu ============ */
+.dropdown{position:relative;display:inline-block}
+.dropdown-toggle{padding:11px 20px;background:linear-gradient(135deg,var(--c-primary),var(--c-primary-2));color:#fff;border:none;border-radius:var(--radius-sm);font-size:.9rem;display:inline-flex;align-items:center;gap:6px;font-family:var(--sans)}
+.dropdown-menu{position:absolute;top:calc(100% + 6px);left:0;background:var(--c-surface);border:1px solid var(--c-border);border-radius:var(--radius-sm);box-shadow:var(--shadow-lg);min-width:210px;padding:6px;opacity:0;visibility:hidden;transform:translateY(-6px);transition:.2s;z-index:60}
+.dropdown.open .dropdown-menu{opacity:1;visibility:visible;transform:translateY(0)}
+.dropdown-menu a{display:block;padding:9px 13px;color:var(--c-text-2);font-size:.9rem;border-radius:6px}
+.dropdown-menu a:hover{background:var(--c-surface-2);color:var(--c-primary)}
+.dropdown-menu .divider{height:1px;background:var(--c-border);margin:6px 0}
+
+/* ============ Timeline ============ */
+.timeline{position:relative;padding-left:30px}
+.timeline::before{content:"";position:absolute;left:9px;top:6px;bottom:6px;width:2px;background:var(--c-gold)}
+.tl-item{position:relative;padding-bottom:26px}
+.tl-item:last-child{padding-bottom:0}
+.tl-item::before{content:"☸";position:absolute;left:-30px;top:2px;width:20px;height:20px;background:var(--c-surface);color:var(--c-gold);font-size:14px;display:grid;place-items:center}
+.tl-item .tl-date{font-size:.78rem;color:var(--c-gold);font-weight:700}
+.tl-item .tl-name{font-family:var(--serif);font-weight:700;font-size:1.05rem;margin:2px 0}
+.tl-item .tl-desc{font-size:.88rem;color:var(--c-text-2)}
+
+/* ============ Tag Cloud / Social / Contact ============ */
+.tag-cloud{display:flex;flex-wrap:wrap;gap:8px}
+.tag{padding:6px 14px;border-radius:20px;background:var(--c-surface-2);color:var(--c-text-2);font-size:.82rem;transition:.2s;cursor:pointer;border:1px solid var(--c-border)}
+.tag:hover{background:var(--c-primary);color:#fff;border-color:var(--c-primary);transform:scale(1.05)}
+.tag.hot{background:color-mix(in srgb,var(--c-gold) 15%,transparent);color:var(--c-primary);border-color:var(--c-gold)}
+.social-icons{display:flex;gap:10px;flex-wrap:wrap}
+.social-icons a{width:42px;height:42px;border-radius:50%;display:grid;place-items:center;background:var(--c-surface-2);color:var(--c-text-2);font-size:18px;transition:.2s;border:1px solid var(--c-border)}
+.social-icons a:hover{transform:translateY(-4px);color:#fff}
+.social-icons a:hover:nth-child(1){background:#1877f2}.social-icons a:hover:nth-child(2){background:#e4405f}
+.social-icons a:hover:nth-child(3){background:#1da1f2}.social-icons a:hover:nth-child(4){background:#ff0000}
+.contact-info{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:14px}
+.ci-item{display:flex;gap:12px;align-items:flex-start;padding:14px;background:var(--c-surface-2);border-radius:var(--radius-sm)}
+.ci-item .ci-ico{width:40px;height:40px;border-radius:10px;background:color-mix(in srgb,var(--c-gold) 15%,transparent);display:grid;place-items:center;font-size:18px;flex-shrink:0}
+.ci-item .ci-label{font-size:.75rem;color:var(--c-text-3)}
+.ci-item .ci-val{font-size:.9rem;font-weight:600}
+
+/* ============ Post / Related / Prev-Next / Category ============ */
+.post-list{display:flex;flex-direction:column;gap:14px}
+.post-item{display:flex;gap:14px;padding:14px;border-radius:var(--radius-sm);transition:.2s;cursor:pointer;border:1px solid transparent}
+.post-item:hover{background:var(--c-surface-2);border-color:var(--c-border)}
+.post-item .thumb{width:64px;height:64px;border-radius:12px;background:linear-gradient(135deg,var(--c-primary),var(--c-gold));flex-shrink:0;display:grid;place-items:center;color:#fff;font-size:26px}
+.post-item .p-meta{font-size:.74rem;color:var(--c-text-3)}
+.post-item .p-title{font-size:.95rem;font-weight:600;line-height:1.5}
+.post-item:hover .p-title{color:var(--c-primary)}
+.prev-next{display:flex;justify-content:space-between;gap:12px;margin-top:18px;flex-wrap:wrap}
+.pn-btn{flex:1;min-width:180px;padding:16px;background:var(--c-surface-2);border-radius:var(--radius-sm);text-align:left;border:1px solid var(--c-border);transition:.2s}
+.pn-btn:hover{border-color:var(--c-gold);box-shadow:var(--shadow)}
+.pn-btn .pn-label{font-size:.72rem;color:var(--c-text-3)}
+.pn-btn .pn-val{font-weight:700;font-family:var(--serif)}
+.pn-btn.next{text-align:right}
+.cat-list{display:flex;flex-direction:column;gap:2px}
+.cat-item{display:flex;justify-content:space-between;padding:11px 14px;border-radius:8px;font-size:.9rem;color:var(--c-text-2);cursor:pointer;transition:.15s}
+.cat-item:hover{background:var(--c-surface-2);color:var(--c-primary)}
+.cat-item .count{background:var(--c-surface-2);padding:1px 10px;border-radius:12px;font-size:.76rem}
+
+/* ============ Tree View ============ */
+.tree{font-size:.92rem;user-select:none}
+.tree ul{list-style:none;padding-left:22px}
+.tree li{padding:3px 0}
+.tree .t-node{display:flex;align-items:center;gap:7px;cursor:pointer;padding:5px 9px;border-radius:6px}
+.tree .t-node:hover{background:var(--c-surface-2)}
+.tree .t-toggle{width:14px;transition:.2s;color:var(--c-gold)}
+.tree .t-node.open .t-toggle{transform:rotate(90deg)}
+.tree .t-children{display:none}
+.tree .t-node.open + .t-children{display:block}
+
+/* ============ Buttons / Hover ============ */
+.btn{padding:11px 24px;border:none;border-radius:var(--radius-sm);font-size:.9rem;font-weight:600;transition:.2s;display:inline-flex;align-items:center;gap:8px}
+.btn-primary{background:linear-gradient(135deg,var(--c-primary),var(--c-primary-2));color:#fff}
+.btn-primary:hover{transform:translateY(-2px);box-shadow:var(--shadow-lg)}
+.btn-outline{background:transparent;border:1.5px solid var(--c-primary);color:var(--c-primary)}
+.btn-outline:hover{background:var(--c-primary);color:#fff}
+.hover-cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:14px}
+.hcard{padding:20px;background:var(--c-surface-2);border-radius:var(--radius-sm);text-align:center;transition:.3s;cursor:pointer;border:1px solid transparent}
+.hcard:hover{transform:translateY(-6px);box-shadow:var(--shadow-lg);border-color:var(--c-gold)}
+.hcard .ico{font-size:28px;margin-bottom:8px}
+
+/* ============ Forms ============ */
+.form-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.form-field{display:flex;flex-direction:column;gap:5px}
+.form-field.full{grid-column:1/-1}
+.form-field label{font-size:.85rem;font-weight:600;color:var(--c-text-2)}
+.form-field input,.form-field select,.form-field textarea{padding:11px 14px;border:1.5px solid var(--c-border);border-radius:var(--radius-sm);background:var(--c-surface);color:var(--c-text);font-size:.92rem;font-family:var(--sans);transition:.2s}
+.form-field input:focus,.form-field select:focus,.form-field textarea:focus{outline:none;border-color:var(--c-gold);box-shadow:0 0 0 3px color-mix(in srgb,var(--c-gold) 15%,transparent)}
+.form-row{display:flex;gap:16px;align-items:center;font-size:.86rem;color:var(--c-text-2);flex-wrap:wrap}
+.form-msg{margin-top:12px;padding:11px 16px;border-radius:8px;font-size:.88rem;display:none}
+.form-msg.success{display:block;background:color-mix(in srgb,var(--c-success) 12%,transparent);color:var(--c-success)}
+.form-msg.error{display:block;background:color-mix(in srgb,var(--c-danger) 12%,transparent);color:var(--c-danger)}
+.email-sub{display:flex;gap:8px;max-width:520px}
+.email-sub input{flex:1;padding:12px 16px;border:1.5px solid var(--c-border);border-radius:var(--radius-sm);background:var(--c-surface);color:var(--c-text)}
+.fav-btn{display:inline-flex;align-items:center;gap:6px;padding:9px 18px;border-radius:20px;border:1.5px solid var(--c-border);background:var(--c-surface);color:var(--c-text-2);font-size:.88rem;transition:.2s}
+.fav-btn:hover{border-color:var(--c-warn)}
+.fav-btn.active{background:color-mix(in srgb,var(--c-warn) 15%,transparent);border-color:var(--c-warn);color:var(--c-primary)}
+
+/* ============ Lazy Load ============ */
+.lazy-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(170px,1fr));gap:14px}
+.lazy-box{aspect-ratio:4/3;border-radius:var(--radius-sm);background:var(--c-surface-2);display:grid;place-items:center;color:var(--c-text-3);font-size:.85rem;position:relative;overflow:hidden;text-align:center;padding:8px}
+.lazy-box.loaded{background:linear-gradient(135deg,var(--c-primary),var(--c-gold));color:#fff}
+
+/* ============ Dashboard ============ */
+.dash-demo{display:grid;grid-template-columns:190px 1fr;gap:0;border:1px solid var(--c-border);border-radius:var(--radius-sm);overflow:hidden;min-height:280px}
+.dash-side{background:var(--c-surface-2);padding:14px;border-right:1px solid var(--c-border)}
+.dash-side .ds-item{padding:9px 13px;border-radius:6px;font-size:.84rem;color:var(--c-text-2);margin-bottom:2px}
+.dash-side .ds-item.active{background:var(--c-primary);color:#fff}
+.dash-side .ds-item:not(.active):hover{background:var(--c-border)}
+.dash-main{padding:18px;background:var(--c-surface)}
+.stat-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(130px,1fr));gap:12px;margin-bottom:14px}
+.stat{background:var(--c-surface-2);padding:14px;border-radius:8px}
+.stat .s-num{font-size:1.4rem;font-weight:800;color:var(--c-primary)}
+.stat .s-label{font-size:.75rem;color:var(--c-text-3)}
+.chart-bar{display:flex;align-items:flex-end;gap:8px;height:100px;padding-top:10px}
+.chart-bar .bar{flex:1;background:linear-gradient(180deg,var(--c-primary),var(--c-gold));border-radius:4px 4px 0 0;min-height:10px;position:relative}
+.chart-bar .bar span{position:absolute;top:-18px;left:50%;transform:translateX(-50%);font-size:.65rem;color:var(--c-text-3)}
+
+/* ============ Link card ============ */
+.link-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:14px}
+.link-card{display:flex;gap:12px;padding:16px;border:1px solid var(--c-border);border-radius:var(--radius-sm);transition:.2s;align-items:flex-start}
+.link-card:hover{border-color:var(--c-gold);box-shadow:var(--shadow);transform:translateY(-2px)}
+.link-card .lk-ico{font-size:26px}
+.link-card .lk-title{font-weight:700;font-size:.92rem}
+.link-card .lk-desc{font-size:.78rem;color:var(--c-text-2);margin-top:2px}
+.link-card .lk-url{font-size:.72rem;color:var(--c-primary);word-break:break-all;margin-top:4px}
+
+/* ============ Context menu / FAB / BTT ============ */
+.context-area{border:2px dashed var(--c-border);border-radius:var(--radius-sm);padding:36px;text-align:center;color:var(--c-text-3);cursor:context-menu;background:var(--c-surface-2)}
+.context-menu{position:fixed;background:var(--c-surface);border:1px solid var(--c-border);border-radius:var(--radius-sm);box-shadow:var(--shadow-lg);min-width:190px;padding:6px;z-index:2000;display:none}
+.context-menu .ctx-item{padding:9px 13px;font-size:.9rem;color:var(--c-text-2);border-radius:6px;display:flex;justify-content:space-between}
+.context-menu .ctx-item:hover{background:var(--c-surface-2);color:var(--c-primary)}
+.context-menu .ctx-item.danger:hover{background:color-mix(in srgb,var(--c-danger) 12%,transparent);color:var(--c-danger)}
+.fab{position:fixed;right:24px;bottom:90px;width:58px;height:58px;border-radius:50%;background:linear-gradient(135deg,var(--c-primary),var(--c-gold));color:#fff;border:none;font-size:26px;box-shadow:var(--shadow-lg);z-index:900;display:grid;place-items:center;transition:.3s}
+.fab:hover{transform:scale(1.1) rotate(15deg)}
+.back-to-top{position:fixed;right:24px;bottom:24px;width:46px;height:46px;border-radius:50%;background:var(--c-surface);border:1px solid var(--c-border);color:var(--c-primary);box-shadow:var(--shadow);z-index:900;display:grid;place-items:center;opacity:0;visibility:hidden;transition:.3s}
+.back-to-top.show{opacity:1;visibility:visible}
+.back-to-top:hover{background:var(--c-primary);color:#fff}
+
+/* ============ Protection banner / RWD ============ */
+.protect-banner{background:color-mix(in srgb,var(--c-warn) 12%,transparent);border:1px solid var(--c-warn);color:var(--c-primary);padding:12px 16px;border-radius:var(--radius-sm);font-size:.85rem;display:flex;gap:10px;align-items:center;margin-bottom:14px;cursor:pointer}
+.rwd-bar{display:flex;gap:8px;margin-bottom:14px;flex-wrap:wrap}
+.rwd-pill{padding:7px 16px;border-radius:20px;border:1px solid var(--c-border);background:var(--c-surface);font-size:.82rem;cursor:pointer}
+.rwd-pill.active{background:var(--c-primary);color:#fff;border-color:var(--c-primary)}
+.rwd-frame{background:var(--c-surface-2);padding:14px;transition:.3s;margin:0 auto;border:2px solid var(--c-border);border-radius:var(--radius-sm)}
+.mock-content{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}
+.mock-block{background:color-mix(in srgb,var(--c-primary) 18%,transparent);border-radius:4px;height:40px;display:grid;place-items:center;font-size:.7rem;color:var(--c-text-2)}
+
+/* ============ Footer ============ */
+.footer{background:var(--c-surface);border-top:1px solid var(--c-border);margin-top:40px;padding:44px 30px 24px}
+.footer-grid{display:grid;grid-template-columns:2fr 1fr 1fr 1.5fr;gap:30px;max-width:1100px;margin:0 auto}
+.footer h4{font-family:var(--serif);font-size:1rem;margin-bottom:14px;color:var(--c-primary)}
+.footer ul{list-style:none}
+.footer ul li{margin-bottom:9px}
+.footer ul a{color:var(--c-text-2);font-size:.88rem}
+.footer ul a:hover{color:var(--c-primary)}
+.footer .f-about{font-size:.88rem;color:var(--c-text-2)}
+.footer-bottom{border-top:1px solid var(--c-border);margin-top:30px;padding-top:20px;text-align:center;font-size:.8rem;color:var(--c-text-3)}
+
+/* ============ Toast ============ */
+.toast{position:fixed;bottom:30px;left:50%;transform:translateX(-50%) translateY(100px);background:var(--c-text);color:var(--c-bg);padding:13px 26px;border-radius:30px;font-size:.9rem;z-index:3000;opacity:0;transition:.3s;box-shadow:var(--shadow-lg)}
+.toast.show{transform:translateX(-50%) translateY(0);opacity:1}
+
+/* ============ Responsive ============ */
+@media(max-width:900px){
+  .sidebar{display:none}.hamburger{display:flex}.nav-links{display:none}.mobile-menu{display:block}
+  .main{padding:18px}.form-grid{grid-template-columns:1fr}.footer-grid{grid-template-columns:1fr 1fr}
+  .hero h1{font-size:1.6rem}.tab-nav{flex-direction:column}.dash-demo{grid-template-columns:1fr}
+  .dash-side{border-right:none;border-bottom:1px solid var(--c-border);display:flex;flex-wrap:wrap;gap:4px}
+}
+@media(max-width:560px){.footer-grid{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+
+<!-- ===== Sticky Top-Nav / Header ===== -->
+<nav class="top-nav" id="topNav">
+  <button class="hamburger" id="hamburgerBtn" aria-label="選單"><span></span><span></span><span></span></button>
+  <div class="brand"><span class="logo">☸</span> 廣論學習網</div>
+  <div class="nav-links">
+    <a href="#intro" class="active">經典</a>
+    <a href="#three">三士道</a>
+    <a href="#lineage">傳承</a>
+    <a href="#dashboard">進度</a>
+    <a href="#resources">資源</a>
+    <a href="#join">研討班</a>
+  </div>
+  <div class="nav-tools">
+    <button class="icon-btn" id="themeToggle" title="切換主題">🌙</button>
+    <button class="icon-btn" title="收藏" onclick="toggleFavNav(this)">☆</button>
+  </div>
+</nav>
+
+<!-- Mobile Menu -->
+<div class="mobile-menu" id="mobileMenu">
+  <a href="#intro">📖 經典</a>
+  <a href="#three">🪷 三士道</a>
+  <a href="#lineage">🕯️ 傳承</a>
+  <a href="#dashboard">📊 進度</a>
+  <a href="#resources">📚 資源</a>
+  <a href="#join">🙏 研討班</a>
+</div>
+
+<div class="shell">
+  <!-- ===== Sidebar ===== -->
+  <aside class="sidebar">
+    <div class="side-search"><input type="text" id="sideSearch" placeholder="搜尋元件/內容..."></div>
+    <div class="side-group">
+      <div class="side-group-title">本網導覽</div>
+      <a class="side-link" href="#intro"><span>📖</span> 經典簡介</a>
+      <a class="side-link" href="#three"><span>🪷</span> 三士道架構</a>
+      <a class="side-link" href="#pillars"><span>🎯</span> 三主要道</a>
+      <a class="side-link" href="#lineage"><span>🕯️</span> 傳承歷史</a>
+      <a class="side-link" href="#dashboard"><span>📊</span> 學習儀表板</a>
+    </div>
+    <div class="side-group">
+      <div class="side-group-title">道次第大綱</div>
+      <a class="side-link side-sub" href="#tree">— 敬信求法</a>
+      <a class="side-link side-sub" href="#tree">— 瑕滿人身</a>
+      <a class="side-link side-sub" href="#tree">— 念死無常</a>
+      <a class="side-link side-sub" href="#tree">— 業果與惡趣苦</a>
+      <a class="side-link side-sub" href="#tree">— 希求解脫</a>
+      <a class="side-link side-sub" href="#tree">— 發菩提心</a>
+      <a class="side-link side-sub" href="#tree">— 六度四攝</a>
+      <a class="side-link side-sub" href="#tree">— 止觀與空性</a>
+    </div>
+    <div class="side-group">
+      <div class="side-group-title">其他</div>
+      <a class="side-link" href="#verse"><span>🪷</span> 每日法語</a>
+      <a class="side-link" href="#join"><span>🙏</span> 參加研討班</a>
+      <a class="side-link" href="#footer"><span>📮</span> 聯絡我們</a>
+    </div>
+  </aside>
+
+  <!-- ===== Main ===== -->
+  <main class="main">
+
+    <!-- HERO -->
+    <div class="hero">
+      <div class="dharma">☸️</div>
+      <h1>菩提道次第廣論</h1>
+      <div class="sub">LAM RIM CHEN MO</div>
+      <div class="ornament">❖ ❖ ❖</div>
+      <p>宗喀巴大師 造 · 法尊法師 漢譯。總攝三藏十二部精要，開顯由凡夫趣向一切種智的完整修行次第。</p>
+      <div class="badges">
+        <span class="badge">格魯派核心論典</span>
+        <span class="badge">三士道</span>
+        <span class="badge">三主要道</span>
+        <span class="badge">RWD</span><span class="badge">Dark Mode</span>
+      </div>
+    </div>
+
+    <!-- Breadcrumb -->
+    <div class="breadcrumb">
+      <a href="#">首頁</a><span>›</span>
+      <a href="#">經典</a><span>›</span>
+      <span class="current">菩提道次第廣論</span>
+    </div>
+
+    <!-- 1. Intro -->
+    <section class="section" id="intro">
+      <div class="section-head"><span class="num">壹</span><h2>經典簡介</h2><span class="en">Introduction</span></div>
+      <div class="section-body">
+        <p class="lead">《<strong>菩提道次第廣論</strong>》（簡稱《廣論》），藏傳佛教格魯派祖師<strong>宗喀巴大師</strong>（1357–1419）依阿底峽尊者《菩提道炬論》架構，總攝佛陀一代時教精要，於西元 1402 年造論。民國年間<strong>法尊法師</strong>譯為漢語。</p>
+        <div class="verse">
+          「此論廣廣開示，從一名苾芻，乃至一切種智所有道法，令無顛倒而起修作。」
+          <span class="src">—— 宗喀巴大師 · 廣論序</span>
+        </div>
+        <p class="lead">全論以「道次第」為骨，將浩瀚佛法組織成一條由淺入深、圓滿無缺的實踐路徑：先求人天善趣，再求解脫輪迴，終歸為利一切眾生而成佛。三士道不是三條路，而是同一條路上的三個階段，後後含攝前前。</p>
+        <!-- Dropdown Menu demo -->
+        <div class="demo" style="margin-bottom:18px">
+          <div style="font-size:.75rem;color:var(--c-text-3);text-transform:uppercase;letter-spacing:.06em;margin-bottom:8px;font-weight:600">Dropdown-Menu 下拉導覽</div>
+          <div style="display:flex;gap:12px;flex-wrap:wrap">
+            <div class="dropdown">
+              <button class="dropdown-toggle" onclick="toggleDropdown(this)">道次第章節 ▾</button>
+              <div class="dropdown-menu">
+                <a href="#three">🌱 下士道</a>
+                <a href="#three">🕊️ 中士道</a>
+                <a href="#three">🪷 上士道</a>
+                <div class="divider"></div>
+                <a href="#pillars">🎯 三主要道</a>
+                <a href="#lineage">🕯️ 傳承源流</a>
+              </div>
+            </div>
+            <div class="dropdown">
+              <button class="dropdown-toggle" onclick="toggleDropdown(this)">學習工具 ▾</button>
+              <div class="dropdown-menu">
+                <a href="#dashboard">📊 學習儀表板</a>
+                <a href="#resources">📚 學習資源</a>
+                <a href="#join">🙏 研討班報名</a>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="link-grid">
+          <a class="link-card" href="https://www.blisswisdom.org/publications/sutras/a/056" target="_blank" rel="noopener">
+            <div class="lk-ico">📖</div><div>
+              <div class="lk-title">廣論線上全文</div>
+              <div class="lk-desc">法尊法師譯，福智全球資訊網</div>
+              <div class="lk-url">blisswisdom.org/.../056</div>
+            </div>
+          </a>
+          <a class="link-card" href="https://bwsangha.org/about/j/a/520-0206" target="_blank" rel="noopener">
+            <div class="lk-ico">🧑‍🏫</div><div>
+              <div class="lk-title">福智僧團 · 廣論簡介</div>
+              <div class="lk-desc">傳承與研讀說明</div>
+              <div class="lk-url">bwsangha.org</div>
+            </div>
+          </a>
+          <a class="link-card" href="https://www.blisswisdom.org/teachings/lamrim2" target="_blank" rel="noopener">
+            <div class="lk-ico">✍️</div><div>
+              <div class="lk-title">日常老和尚講述手抄稿</div>
+              <div class="lk-desc">鳳山寺版《廣論》筆記</div>
+              <div class="lk-url">blisswisdom.org/.../lamrim2</div>
+            </div>
+          </a>
+          <a class="link-card" href="https://bwsangha.org/topics/lrannotations" target="_blank" rel="noopener">
+            <div class="lk-ico">📚</div><div>
+              <div class="lk-title">四家合註</div>
+              <div class="lk-desc">四位祖師對廣論的權威註釋</div>
+              <div class="lk-url">bwsangha.org/topics/lrannotations</div>
+            </div>
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- 2. Three Scopes Tabs -->
+    <section class="section" id="three">
+      <div class="section-head"><span class="num">貳</span><h2>三士道架構</h2><span class="en">Three Scopes · Tabs</span></div>
+      <div class="section-body">
+        <p class="lead">「三士道」是全論骨幹。下士、中士、上士，依行者的意樂層次而分，層層增上。</p>
+        <div class="tabs">
+          <div class="tab-nav">
+            <button class="tab-btn active" data-tab="t1">🌱 下士道</button>
+            <button class="tab-btn" data-tab="t2">🕊️ 中士道</button>
+            <button class="tab-btn" data-tab="t3">🪷 上士道</button>
+          </div>
+          <div class="tab-panel active" id="t1">
+            <h3>下士道 — 希求來世善趣</h3>
+            <p>思惟暇滿人身難得、念死無常、惡趣眾苦，進而歸依三寶、斷惡修善、積集資糧，以求不墮惡趣、保住增上生。此道核心是「不敢放逸」。</p>
+            <p><strong>關鍵修學：</strong>暇滿義大、念死無常、三惡趣苦、歸依三寶、業果取捨。</p>
+          </div>
+          <div class="tab-panel" id="t2">
+            <h3>中士道 — 希求自利解脫</h3>
+            <p>進一步思惟：縱生善趣，輪迴本質仍是苦。遂發起真正出離心，體認苦、集、滅、道四諦，修戒定慧，從輪迴中解脫。</p>
+            <p><strong>關鍵修學：</strong>苦諦、集諦、十二因緣、出離心、戒定三學。</p>
+          </div>
+          <div class="tab-panel" id="t3">
+            <h3>上士道 — 發菩提心 成佛利生</h3>
+            <p>見自己與一切母親有情皆在輪迴受苦，發起為利眾生願成佛的菩提心，進而修六度萬行、四攝法，並以中觀正見通達諸法空性。</p>
+            <p><strong>關鍵修學：</strong>菩提心、賢劫願行、六度四攝、止觀雙運、空性見。</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 3. Three Pillars -->
+    <section class="section" id="pillars">
+      <div class="section-head"><span class="num">參</span><h2>三主要道</h2><span class="en">Three Principal Aspects</span></div>
+      <div class="section-body">
+        <p class="lead">宗大師另造《三主要道論》，提挈廣論心髓為三個要點：</p>
+        <div class="three-pillars">
+          <div class="pillar p1"><div class="p-ico">🚪</div><div class="p-name">出離心</div><div class="p-desc">厭離輪迴，不著三界</div></div>
+          <div class="pillar p2"><div class="p-ico">💗</div><div class="p-name">菩提心</div><div class="p-desc">為利眾生，誓成佛道</div></div>
+          <div class="pillar p3"><div class="p-ico">🧘</div><div class="p-name">空正見</div><div class="p-desc">緣起性空，遠離二邊</div></div>
+        </div>
+        <!-- Hover demo -->
+        <div style="margin-top:22px">
+          <div style="font-size:.75rem;color:var(--c-text-3);text-transform:uppercase;letter-spacing:.06em;margin-bottom:8px;font-weight:600">Hover 懸停效果</div>
+          <div class="hover-cards">
+            <div class="hcard"><div class="ico">🚪</div>出離</div>
+            <div class="hcard"><div class="ico">💗</div>慈悲</div>
+            <div class="hcard"><div class="ico">🧘</div>智慧</div>
+            <div class="hcard"><div class="ico">🪷</div>菩提</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 4. Lineage Timeline -->
+    <section class="section" id="lineage">
+      <div class="section-head"><span class="num">肆</span><h2>傳承源流</h2><span class="en">Lineage · Time-Line</span></div>
+      <div class="section-body">
+        <div class="timeline">
+          <div class="tl-item"><div class="tl-date">釋尊 · 印度</div><div class="tl-name">佛陀宣說三藏十二部</div><div class="tl-desc">一切道次第之源。</div></div>
+          <div class="tl-item"><div class="tl-date">1054</div><div class="tl-name">阿底峽尊者《菩提道炬論》</div><div class="tl-desc">立「三士道」框架，為道次第鼻祖。</div></div>
+          <div class="tl-item"><div class="tl-date">1402</div><div class="tl-name">宗喀巴大師造《廣論》</div><div class="tl-desc">總攝顯教要旨，完成廣大體系。</div></div>
+          <div class="tl-item"><div class="tl-date">1930s</div><div class="tl-name">法尊法師漢譯</div><div class="tl-desc">讓漢地學人得以直接研讀。</div></div>
+          <div class="tl-item"><div class="tl-date">1988 起</div><div class="tl-name">日常老和尚系統宣講</div><div class="tl-desc">在台開設廣論研討，廣為流布。</div></div>
+          <div class="tl-item"><div class="tl-date">當代</div><div class="tl-name">真如老師接續講授</div><div class="tl-desc">《廣海明月》《四家合註》續弘不絕。</div></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 5. Tree View -->
+    <section class="section" id="tree">
+      <div class="section-head"><span class="num">伍</span><h2>道次第大綱</h2><span class="en">Outline · Tree-View</span></div>
+      <div class="section-body">
+        <p class="lead">點擊可展開／收合，瀏覽廣論全書結構（Tree-View 元件）。</p>
+        <div class="tree">
+          <ul>
+            <li>
+              <div class="t-node open"><span class="t-toggle">▶</span>📁 道前基礎</div>
+              <div class="t-children"><ul>
+                <li><div class="t-node"><span class="t-toggle"></span>📄 依止善知識</div></li>
+                <li><div class="t-node"><span class="t-toggle"></span>📄 暇滿人身</div></li>
+              </ul></div>
+            </li>
+            <li>
+              <div class="t-node open"><span class="t-toggle">▶</span>📁 三士道</div>
+              <div class="t-children"><ul>
+                <li><div class="t-node"><span class="t-toggle"></span>🌱 下士道（念死、惡趣、業果）</div></li>
+                <li>
+                  <div class="t-node open"><span class="t-toggle">▶</span>🕊️ 中士道</div>
+                  <div class="t-children"><ul>
+                    <li><div class="t-node"><span class="t-toggle"></span>📄 出離心</div></li>
+                    <li><div class="t-node"><span class="t-toggle"></span>📄 戒定慧</div></li>
+                  </ul></div>
+                </li>
+                <li>
+                  <div class="t-node open"><span class="t-toggle">▶</span>🪷 上士道</div>
+                  <div class="t-children"><ul>
+                    <li><div class="t-node"><span class="t-toggle"></span>📄 發菩提心</div></li>
+                    <li><div class="t-node"><span class="t-toggle"></span>📄 六度四攝</div></li>
+                    <li><div class="t-node"><span class="t-toggle"></span>📄 止觀與空性</div></li>
+                  </ul></div>
+                </li>
+              </ul></div>
+            </li>
+            <li><div class="t-node"><span class="t-toggle"></span>📄 回向功德</div></li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- 6. Dashboard -->
+    <section class="section" id="dashboard">
+      <div class="section-head"><span class="num">陸</span><h2>學習儀表板</h2><span class="en">Dashboard-Layout</span></div>
+      <div class="section-body">
+        <div class="dash-demo">
+          <div class="dash-side">
+            <div class="ds-item active">📊 總覽</div>
+            <div class="ds-item">📖 廣論課文</div>
+            <div class="ds-item">📝 研討進度</div>
+            <div class="ds-item">🙏 共修紀錄</div>
+            <div class="ds-item">⚙️ 設定</div>
+          </div>
+          <div class="dash-main">
+            <div class="stat-grid">
+              <div class="stat"><div class="s-num">24 / 24</div><div class="s-label">廣論卷數</div></div>
+              <div class="stat"><div class="s-num">3</div><div class="s-label">三士道</div></div>
+              <div class="stat"><div class="s-num">78%</div><div class="s-label">研討進度</div></div>
+              <div class="stat"><div class="s-num">365</div><div class="s-label">累積天數</div></div>
+            </div>
+            <div class="chart-bar">
+              <div class="bar" style="height:35%"><span>道前</span></div>
+              <div class="bar" style="height:55%"><span>下士</span></div>
+              <div class="bar" style="height:72%"><span>中士</span></div>
+              <div class="bar" style="height:90%"><span>上士</span></div>
+              <div class="bar" style="height:65%"><span>止觀</span></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 7. Verse / Tag cloud / Social / Contact -->
+    <section class="section" id="verse">
+      <div class="section-head"><span class="num">柒</span><h2>法語與社群</h2><span class="en">Verse · Tag · Social · Contact</span></div>
+      <div class="section-body">
+        <div class="verse">
+          「一切安乐，皆從願樂利他而生；一切苦痛，皆由自利心心所起。」
+          <span class="src">—— 上士道引《入行論》</span>
+        </div>
+        <!-- Tag cloud -->
+        <div style="font-size:.75rem;color:var(--c-text-3);text-transform:uppercase;letter-spacing:.06em;margin:14px 0 8px;font-weight:600">Tag-Cloud 標籤雲</div>
+        <div class="tag-cloud">
+          <span class="tag hot">念死無常</span><span class="tag">暇滿人身</span><span class="tag hot">菩提心</span>
+          <span class="tag">出離心</span><span class="tag">空性</span><span class="tag">業果</span>
+          <span class="tag">歸依</span><span class="tag">善知識</span><span class="tag">止觀</span>
+        </div>
+        <!-- Social icons -->
+        <div style="font-size:.75rem;color:var(--c-text-3);text-transform:uppercase;letter-spacing:.06em;margin:18px 0 8px;font-weight:600">Social-Icons 社交圖示</div>
+        <div class="social-icons">
+          <a href="#" title="Facebook">📘</a>
+          <a href="#" title="Instagram">📸</a>
+          <a href="#" title="Twitter">🐦</a>
+          <a href="#" title="YouTube">▶️</a>
+        </div>
+        <!-- Contact info -->
+        <div style="font-size:.75rem;color:var(--c-text-3);text-transform:uppercase;letter-spacing:.06em;margin:18px 0 8px;font-weight:600">Contact-Info 聯絡資訊</div>
+        <div class="contact-info">
+          <div class="ci-item"><div class="ci-ico">📍</div><div><div class="ci-label">地址</div><div class="ci-val">臺中市中區示意路 88 號</div></div></div>
+          <div class="ci-item"><div class="ci-ico">📞</div><div><div class="ci-label">電話</div><div class="ci-val">+886 4 000 0000</div></div></div>
+          <div class="ci-item"><div class="ci-ico">✉️</div><div><div class="ci-label">Email</div><div class="ci-val">lamrim@example.com</div></div></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 8. Latest / Related / Category / Prev-Next -->
+    <section class="section">
+      <div class="section-head"><span class="num">捌</span><h2>文章與分類</h2><span class="en">Posts · Category · Prev-Next</span></div>
+      <div class="section-body">
+        <!-- Latest posts -->
+        <div style="font-size:.75rem;color:var(--c-text-3);text-transform:uppercase;letter-spacing:.06em;margin-bottom:8px;font-weight:600">Latest-Posts 最新文章</div>
+        <div class="post-list">
+          <div class="post-item"><div class="thumb">📿</div><div><div class="p-meta">2026-09-28 · 下士道</div><div class="p-title">如何思惟「暇滿人身義大」—— 一則研討心得</div></div></div>
+          <div class="post-item"><div class="thumb">🕯️</div><div><div class="p-meta">2026-09-20 · 前行</div><div class="p-title">依止善知識：廣論為何把它列為第一道</div></div></div>
+          <div class="post-item"><div class="thumb">🪷</div><div><div class="p-meta">2026-09-12 · 上士道</div><div class="p-title">菩提心的修習次第：從知母、念恩到悅意慈</div></div></div>
+        </div>
+        <!-- Related -->
+        <div style="font-size:.75rem;color:var(--c-text-3);text-transform:uppercase;letter-spacing:.06em;margin:18px 0 8px;font-weight:600">Related-Posts 相關文章</div>
+        <div class="post-list">
+          <div class="post-item"><div class="thumb" style="background:linear-gradient(135deg,#0f766e,#d97706)">🔗</div><div><div class="p-meta">相關 · 概念</div><div class="p-title">三主要道與三士道的關係</div></div></div>
+          <div class="post-item"><div class="thumb" style="background:linear-gradient(135deg,#92400e,#0f766e)">🔗</div><div><div class="p-meta">相關 · 實修</div><div class="p-title">業果四力懺悔的日常運用</div></div></div>
+        </div>
+        <!-- Category -->
+        <div style="font-size:.75rem;color:var(--c-text-3);text-transform:uppercase;letter-spacing:.06em;margin:18px 0 8px;font-weight:600">Category 分類</div>
+        <div class="cat-list">
+          <div class="cat-item"><span>🌱 下士道</span><span class="count">42</span></div>
+          <div class="cat-item"><span>🕊️ 中士道</span><span class="count">28</span></div>
+          <div class="cat-item"><span>🪷 上士道</span><span class="count">35</span></div>
+          <div class="cat-item"><span>📖 前行與傳承</span><span class="count">19</span></div>
+        </div>
+        <!-- Prev-Next -->
+        <div class="prev-next">
+          <a class="pn-btn" href="#"><div class="pn-label">‹ 上一篇</div><div class="pn-val">念死無常的三根本</div></a>
+          <a class="pn-btn next" href="#"><div class="pn-label">下一篇 ›</div><div class="pn-val">業果四力懺悔</div></a>
+        </div>
+      </div>
+    </section>
+
+    <!-- 9. Accordion / Resources -->
+    <section class="section" id="resources">
+      <div class="section-head"><span class="num">玖</span><h2>常見問題</h2><span class="en">FAQ · Accordion</span></div>
+      <div class="section-body">
+        <div class="accordion">
+          <div class="acc-item open">
+            <button class="acc-header">初次接觸，應如何開始？ <span class="chev">▾</span></button>
+            <div class="acc-body"><div class="acc-body-inner">先理解「道次第」整體地圖（三士道），再從「敬信求法、暇滿人身、念死無常」漸次深入。建議搭配研討班共學。</div></div>
+          </div>
+          <div class="acc-item">
+            <button class="acc-header">研討班如何參加？ <span class="chev">▾</span></button>
+            <div class="acc-body"><div class="acc-body-inner">各地福智道場設有廣論研討班，每週聚會一次，依進度共讀共研。可於本頁「研討班報名」表單登記。</div></div>
+          </div>
+          <div class="acc-item">
+            <button class="acc-header">《四家合註》是什麼？ <span class="chev">▾</span></button>
+            <div class="acc-body"><div class="acc-body-inner">傑曹傑、克主傑等四位格魯派祖師對《廣論》的權威註釋。福智月光譯經院譯為白話校註，是深入研讀必備。</div></div>
+          </div>
+          <div class="acc-item">
+            <button class="acc-header">需要先具備什麼基礎？ <span class="chev">▾</span></button>
+            <div class="acc-body"><div class="acc-body-inner">不需佛教背景。只要有一顆想認識自心、改善生命的心，願按文逐句思惟即可。論文本身從「依止善知識」起引導。</div></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 10. Favorite / Context / Lazy -->
+    <section class="section">
+      <div class="section-head"><span class="num">拾</span><h2>互動示範</h2><span class="en">Favorite · Context · Lazy-Load</span></div>
+      <div class="section-body">
+        <div style="font-size:.75rem;color:var(--c-text-3);text-transform:uppercase;letter-spacing:.06em;margin-bottom:8px;font-weight:600">Favorite 收藏</div>
+        <button class="fav-btn" onclick="toggleFav(this)">☆ 加入最愛</button>
+
+        <div style="font-size:.75rem;color:var(--c-text-3);text-transform:uppercase;letter-spacing:.06em;margin:18px 0 8px;font-weight:600">Context-Menu 右鍵選單</div>
+        <div class="context-area" id="ctxArea">👉 在此區域按右鍵，看看自訂選單</div>
+
+        <div style="font-size:.75rem;color:var(--c-text-3);text-transform:uppercase;letter-spacing:.06em;margin:18px 0 8px;font-weight:600">Lazy-Load 進階懶載入（滾動到下方觸發）</div>
+        <div class="lazy-grid" id="lazyGrid"></div>
+      </div>
+    </section>
+
+    <!-- 11. Register Form -->
+    <section class="section" id="join">
+      <div class="section-head"><span class="num">拾壹</span><h2>參加研討班</h2><span class="en">Register-Form</span></div>
+      <div class="section-body">
+        <p class="lead">留下資料，我們會為您安排就近研討班與共學夥伴。</p>
+        <form onsubmit="return submitForm(event,'regMsg')">
+          <div class="form-grid">
+            <div class="form-field"><label>法名 / 姓名 *</label><input type="text" required placeholder="請輸入姓名"></div>
+            <div class="form-field"><label>聯絡電話 *</label><input type="tel" required placeholder="09xx-xxxxxx"></div>
+            <div class="form-field"><label>Email *</label><input type="email" required placeholder="you@example.com"></div>
+            <div class="form-field"><label>所在地區</label><select><option>北部</option><option>中部</option><option>南部</option><option>東部</option><option>海外</option></select></div>
+            <div class="form-field full"><label>學習背景（選填）</label><textarea rows="2" placeholder="例如：初次接觸 / 已讀過一遍 / 其他論典..."></textarea></div>
+            <div class="form-row full">
+              <label><input type="checkbox" required> 我同意以本資料聯繫研討班事宜</label>
+              <label><input type="checkbox"> 訂閱法語電子報</label>
+            </div>
+          </div>
+          <div style="margin-top:16px"><button class="btn btn-primary" type="submit">🙏 送出報名</button></div>
+          <div class="form-msg" id="regMsg"></div>
+        </form>
+      </div>
+    </section>
+
+    <!-- 12. Subscribe / Form submit -->
+    <section class="section">
+      <div class="section-head"><span class="num">拾貳</span><h2>電子報與回饋</h2><span class="en">Subscribe · Form-Submit</span></div>
+      <div class="section-body">
+        <p class="lead">每天一封《廣論》法語，與您相伴修行（Email-Subscribe）：</p>
+        <form class="email-sub" onsubmit="return submitForm(event,'subMsg')">
+          <input type="email" required placeholder="輸入 Email 訂閱...">
+          <button class="btn btn-primary" type="submit">訂閱</button>
+        </form>
+        <div class="form-msg" id="subMsg"></div>
+        <div style="margin-top:22px">
+          <p class="lead">想與我們交流（Form-Submit）：</p>
+          <form onsubmit="return submitForm(event,'msg2')">
+            <div class="form-field" style="max-width:520px"><label>留言 *</label><textarea rows="3" required placeholder="想與大家分享的體會..."></textarea></div>
+            <div style="margin-top:10px"><button class="btn btn-outline" type="submit">送出訊息</button></div>
+            <div class="form-msg" id="msg2"></div>
+          </form>
+        </div>
+      </div>
+    </section>
+
+    <!-- 13. Protection / RWD / Meta -->
+    <section class="section">
+      <div class="section-head"><span class="num">拾參</span><h2>系統設定</h2><span class="en">Protection · RWD · SEO</span></div>
+      <div class="section-body">
+        <div class="protect-banner" id="protectBanner">🛡️ 已啟用防複製保護（點此開關）。攔截右鍵／複製／選取，可設定為授權模式。本區即 Anti-Copy 元件。</div>
+        <div style="font-size:.75rem;color:var(--c-text-3);text-transform:uppercase;letter-spacing:.06em;margin:16px 0 8px;font-weight:600">RWD 響應式預覽</div>
+        <div class="rwd-bar">
+          <button class="rwd-pill active" data-w="100%">桌面 100%</button>
+          <button class="rwd-pill" data-w="768px">平板 768</button>
+          <button class="rwd-pill" data-w="375px">手機 375</button>
+        </div>
+        <div class="rwd-frame" id="rwdFrame" style="width:100%">
+          <div class="mock-content" id="mockContent">
+            <div class="mock-block">Header</div><div class="mock-block">Nav</div><div class="mock-block">Main</div>
+          </div>
+        </div>
+        <div style="font-size:.75rem;color:var(--c-text-3);text-transform:uppercase;letter-spacing:.06em;margin:18px 0 8px;font-weight:600">Meta & SEO（已置於 head）</div>
+        <div class="code-block" style="background:#0f172a;color:#e2e8f0;padding:16px;border-radius:8px;font-family:Consolas,monospace;font-size:.78rem;overflow-x:auto;position:relative">
+          <button class="copy-btn" style="position:absolute;top:8px;right:8px;background:rgba(255,255,255,.1);color:#fff;border:none;padding:4px 10px;border-radius:6px;font-size:.72rem;cursor:pointer" onclick="copyCode(this)">複製</button>
+          &lt;meta charset="UTF-8"&gt; &nbsp;&lt;!-- meta-utf8 --&gt;<br>
+          &lt;meta name="viewport" ...&gt; &nbsp;&lt;!-- meta-viewport --&gt;<br>
+          &lt;meta name="theme-color" ...&gt; &nbsp;&lt;!-- theme-color --&gt;<br>
+          &lt;link rel="canonical" ...&gt; &nbsp;&lt;!-- canonical --&gt;<br>
+          &lt;link rel="icon" ...&gt; &nbsp;&lt;!-- favicon --&gt;
+        </div>
+      </div>
+    </section>
+
+  </main>
+</div>
+
+<!-- ===== Footer ===== -->
+<footer class="footer" id="footer">
+  <div class="footer-grid">
+    <div>
+      <h4>☸ 廣論學習網</h4>
+      <p class="f-about">以《菩提道次第廣論》為核心的學習資源站，願與諸仁者共步道次第，同趨一切種智。</p>
+      <div class="social-icons" style="margin-top:12px">
+        <a href="#">📘</a><a href="#">📸</a><a href="#">🐦</a>
+      </div>
+    </div>
+    <div>
+      <h4>經典</h4>
+      <ul>
+        <li><a href="https://www.blisswisdom.org/publications/sutras/a/056" target="_blank">廣論全文</a></li>
+        <li><a href="https://bwsangha.org/topics/lrannotations" target="_blank">四家合註</a></li>
+        <li><a href="https://www.blisswisdom.org/teachings/lamrim2" target="_blank">手抄稿</a></li>
+      </ul>
+    </div>
+    <div>
+      <h4>導覽</h4>
+      <ul>
+        <li><a href="#three">三士道</a></li>
+        <li><a href="#lineage">傳承</a></li>
+        <li><a href="#dashboard">學習進度</a></li>
+      </ul>
+    </div>
+    <div>
+      <h4>訂閱更新</h4>
+      <form class="email-sub" onsubmit="return submitForm(event,'footMsg')" style="max-width:100%">
+        <input type="email" required placeholder="Email...">
+        <button class="btn btn-primary" type="submit">→</button>
+      </form>
+      <div class="form-msg" id="footMsg"></div>
+    </div>
+  </div>
+  <div class="footer-bottom">© 2026 廣論學習網 · 教學展示 prototype · 法住法位，同霑法益</div>
+</footer>
+
+<!-- FAB / Back to top / Context menu / Toast -->
+<button class="fab" onclick="showToast('🙏 阿彌陀佛，願眾生離苦得樂')">☸</button>
+<button class="back-to-top" id="backToTop" onclick="scrollTo({top:0,behavior:'smooth'})">↑</button>
+<div class="context-menu" id="contextMenu">
+  <div class="ctx-item">📋 複製 <span>Ctrl+C</span></div>
+  <div class="ctx-item">⭐ 加入最愛</div>
+  <div class="ctx-item">🔍 搜尋章節</div>
+  <div class="divider" style="height:1px;background:var(--c-border);margin:6px 0"></div>
+  <div class="ctx-item danger">🗑️ 刪除</div>
+</div>
+<div class="toast" id="toast"></div>
+
+<script>
+/* ===== Theme ===== */
+const tb=document.getElementById('themeToggle');
+const saved=localStorage.getItem('lamrim-theme')||(matchMedia('(prefers-color-scheme:dark)').matches?'dark':'light');
+apply(saved);
+tb.onclick=()=>{const n=document.documentElement.dataset.theme==='dark'?'light':'dark';apply(n);localStorage.setItem('lamrim-theme',n)};
+function apply(t){document.documentElement.dataset.theme=t;tb.textContent=t==='dark'?'☀️':'🌙';document.querySelector('meta[name=theme-color]').content=t==='dark'?'#1a130b':'#92400e'}
+
+/* ===== Hamburger / Mobile menu ===== */
+const hb=document.getElementById('hamburgerBtn'),mm=document.getElementById('mobileMenu');
+hb.onclick=()=>{hb.classList.toggle('open');mm.classList.toggle('open')};
+mm.querySelectorAll('a').forEach(a=>a.onclick=()=>{hb.classList.remove('open');mm.classList.remove('open')});
+
+/* ===== Accordion ===== */
+document.querySelectorAll('.acc-header').forEach(h=>h.onclick=()=>{
+  const item=h.parentElement,open=item.classList.contains('open');
+  item.parentElement.querySelectorAll('.acc-item').forEach(i=>{i.classList.remove('open');i.querySelector('.acc-body').style.maxHeight=null});
+  if(!open){item.classList.add('open');const b=item.querySelector('.acc-body');b.style.maxHeight=b.scrollHeight+'px'}
+});
+document.querySelector('.acc-item.open .acc-header').click();
+
+/* ===== Tabs ===== */
+document.querySelectorAll('.tab-btn').forEach(b=>b.onclick=()=>{
+  const w=b.closest('.tabs');
+  w.querySelectorAll('.tab-btn').forEach(x=>x.classList.remove('active'));
+  w.querySelectorAll('.tab-panel').forEach(x=>x.classList.remove('active'));
+  b.classList.add('active');document.getElementById(b.dataset.tab).classList.add('active');
+});
+
+/* ===== Dropdown ===== */
+function toggleDropdown(btn){
+  const dd=btn.parentElement,open=dd.classList.contains('open');
+  document.querySelectorAll('.dropdown.open').forEach(d=>d.classList.remove('open'));
+  if(!open)dd.classList.add('open');
+}
+document.addEventListener('click',e=>{if(!e.target.closest('.dropdown'))document.querySelectorAll('.dropdown.open').forEach(d=>d.classList.remove('open'))});
+
+/* ===== Back to top ===== */
+const btt=document.getElementById('backToTop');
+addEventListener('scroll',()=>btt.classList.toggle('show',scrollY>300),{passive:true});
+
+/* ===== Toast ===== */
+let tt;
+function showToast(m){const t=document.getElementById('toast');t.textContent=m;t.classList.add('show');clearTimeout(tt);tt=setTimeout(()=>t.classList.remove('show'),2400)}
+
+/* ===== Favorite ===== */
+function toggleFav(b){const a=b.classList.toggle('active');if(b.classList.contains('fav-btn'))b.innerHTML=a?'★ 已收藏':'☆ 加入最愛';showToast(a?'⭐ 已收藏':'已取消')}
+function toggleFavNav(b){b.classList.toggle('active');showToast('已加入最愛')}
+
+/* ===== Context menu ===== */
+const ctxArea=document.getElementById('ctxArea'),ctxMenu=document.getElementById('contextMenu');
+ctxArea.addEventListener('contextmenu',e=>{e.preventDefault();ctxMenu.style.display='block';ctxMenu.style.left=Math.min(e.clientX,innerWidth-210)+'px';ctxMenu.style.top=Math.min(e.clientY,innerHeight-200)+'px'});
+document.addEventListener('click',()=>ctxMenu.style.display='none');
+ctxMenu.querySelectorAll('.ctx-item').forEach(i=>i.onclick=()=>{showToast('執行：'+i.textContent.trim().split(' ')[0]);ctxMenu.style.display='none'});
+
+/* ===== Tree view ===== */
+document.querySelectorAll('.t-node').forEach(n=>n.onclick=e=>{e.stopPropagation();n.classList.toggle('open')});
+
+/* ===== Sidebar search ===== */
+document.getElementById('sideSearch').addEventListener('input',e=>{
+  const q=e.target.value.toLowerCase();
+  document.querySelectorAll('.side-link').forEach(l=>{l.style.display=l.textContent.toLowerCase().includes(q)?'':'none'})
+});
+
+/* ===== Scroll spy ===== */
+const secs=[...document.querySelectorAll('section[id]')];
+addEventListener('scroll',()=>{let c=secs[0]?.id;secs.forEach(s=>{if(scrollY>=s.offsetTop-120)c=s.id});document.querySelectorAll('.side-link').forEach(l=>l.classList.toggle('active',l.getAttribute('href')==='#'+c))},{passive:true});
+
+/* ===== Forms ===== */
+function submitForm(e,id){e.preventDefault();const m=document.getElementById(id);m.className='form-msg success';m.textContent='✅ 已送出，我們會盡快與您聯繫。';e.target.reset();showToast('已送出 🙏');return false}
+
+/* ===== Lazy load ===== */
+const lg=document.getElementById('lazyGrid');
+['道前','下士道','中士道','上士道','止觀','回向','六度','四攝','業果','菩提心','出離心','空性'].forEach((t,i)=>{
+  const d=document.createElement('div');d.className='lazy-box';d.textContent='等待載入 '+t;lg.appendChild(d);
+});
+const io=new IntersectionObserver(es=>es.forEach(en=>{if(en.isIntersecting){en.target.classList.add('loaded');en.target.textContent='✅ '+en.target.textContent.replace('等待載入 ','');io.unobserve(en.target)}}),{threshold:.3});
+document.querySelectorAll('.lazy-box').forEach(b=>io.observe(b));
+
+/* ===== RWD preview ===== */
+document.querySelectorAll('.rwd-pill').forEach(p=>p.onclick=()=>{
+  document.querySelectorAll('.rwd-pill').forEach(x=>x.classList.remove('active'));p.classList.add('active');
+  const f=document.getElementById('rwdFrame');f.style.width=p.dataset.w;
+  const mc=document.getElementById('mockContent');
+  if(p.dataset.w==='375px')mc.style.gridTemplateColumns='1fr';
+  else if(p.dataset.w==='768px')mc.style.gridTemplateColumns='repeat(2,1fr)';
+  else mc.style.gridTemplateColumns='repeat(3,1fr)';
+});
+
+/* ===== Copy code ===== */
+function copyCode(btn){const c=btn.parentElement;const t=c.innerText.replace('複製','').trim();navigator.clipboard?.writeText(t).then(()=>{btn.textContent='已複製';setTimeout(()=>btn.textContent='複製',1500)})}
+
+/* ===== Anti-copy protection (toggleable) ===== */
+let protectOn=true;
+document.addEventListener('copy',e=>{if(protectOn && !e.target.closest('.code-block')){e.preventDefault();showToast('🛡️ 內容受保護')}});
+const pb=document.getElementById('protectBanner');
+pb.onclick=()=>{protectOn=!protectOn;pb.innerHTML=protectOn?'🛡️ 已啟用防複製保護（點此開關）':'防複製：已關閉（點此開啟）';showToast(protectOn?'防複製開啟':'防複製關閉')};
+</script>
+</body>
+</html>
