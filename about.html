@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#2b2720">
+<link rel="icon" href="images/favicon.svg" type="image/svg+xml">
+<link rel="canonical" href="/about.html">
+<title>關於與授權 — 古籍知識庫</title>
+<meta name="description" content="古籍知識庫的來源、開放授權與捐贈典藏說明。">
+<link rel="stylesheet" href="css/main.css">
+</head>
+<body>
+
+<header class="site-header" id="site-header"></header>
+
+<div class="container">
+  <nav class="breadcrumb" id="breadcrumb"></nav>
+</div>
+
+<div class="container layout">
+  <main class="main-col">
+    <h1 class="page-title">關於與授權</h1>
+    <p class="lead">古籍知識庫為免費公開知識庫，並以捐贈典藏方式尋求官方長期保存。</p>
+
+    <div class="card">
+      <h2 class="sec">計畫定位</h2>
+      <p>匯集《易》《儒》《道》《佛》《子》《史》十藏古典文獻約 <b>13,331 部</b>，提供全文檢索與線上閱讀，秉持免費公開精神。</p>
+      <div class="notice info">目前為範例示意版，收錄 6 本代表性書目以展示介面；完整 TXT 匯入後上線。</div>
+    </div>
+
+    <div class="card">
+      <h2 class="sec">授權與來源</h2>
+      <table class="data">
+        <thead><tr><th>項目</th><th>說明</th></tr></thead>
+        <tbody>
+          <tr><td>原文</td><td>古典文獻屬公有領域</td></tr>
+          <tr><td>整理成果</td><td>採用 CC BY-NC 4.0（署名・非商業）授權</td></tr>
+          <tr><td>來源標註</td><td>每一部書將標註版本與數位化來源出處</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="card">
+      <h2 class="sec">捐贈典藏</h2>
+      <p>尋求向以下機構捐贈／合作，以獲得官方永久保存與背書：</p>
+      <ul style="padding-left:20px;line-height:2;">
+        <li>國家圖書館（古籍數位典藏徵集）</li>
+        <li>中研院 漢籍電子文獻</li>
+        <li>故宮博物院</li>
+        <li>Internet Archive（整包永久保存）</li>
+        <li>維基文庫（名典逐本協作）</li>
+        <li>CBETA（佛藏洽談）</li>
+      </ul>
+    </div>
+
+    <div class="card">
+      <h2 class="sec">建置時間軸</h2>
+      <div id="timeline"></div>
+    </div>
+
+    <div class="card">
+      <h2 class="sec">常見問題（折疊）</h2>
+      <div class="acc">
+        <div class="acc-item">
+          <div class="acc-head">內容是否免費？<span class="arrow">›</span></div>
+          <div class="acc-body">是。本知識庫完全免費公開，原文屬公有領域，整理成果採 CC BY-NC 授權。</div>
+        </div>
+        <div class="acc-item">
+          <div class="acc-head">如何取得完整 13,331 部？<span class="arrow">›</span></div>
+          <div class="acc-body">完整 TXT 匯入後將全數上線並提供全文檢索，目前為範例示意版（6 本）。</div>
+        </div>
+        <div class="acc-item">
+          <div class="acc-head">可否下載或轉載？<span class="arrow">›</span></div>
+          <div class="acc-body">原文屬公有領域可自由引用；請依 CC BY-NC 授權標註來源，非商業使用。</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="card">
+      <h2 class="sec">聯絡資訊</h2>
+      <div class="contact-info">
+        <div class="row"><span class="lbl">Email</span><span class="protected-email" data-email-protect="Y29udGFjdEBndWppLWxpYnJhcnkuZXhhbXBsZQ==" title="點擊顯示">✉ 點擊顯示信箱</span></div>
+        <div class="row"><span class="lbl">社群</span></div>
+      </div>
+      <div id="social" style="margin-top:8px;"></div>
+    </div>
+  </main>
+  <aside class="side-col"><div id="sidebar"></div></aside>
+</div>
+
+<footer class="site-footer" id="site-footer"></footer>
+<button class="back-top" id="back-top" aria-label="返回頂部">↑</button>
+<div class="fab-group" id="fab-group">
+  <button class="fab share" id="fab-share" aria-label="分享" title="分享連結">⇪</button>
+  <button class="fab fav" id="fab-fav" aria-label="我的最愛" title="我的最愛">♥</button>
+  <button class="fab top" id="fab-top" aria-label="返回頂部" title="返回頂部">↑</button>
+</div>
+<div class="quick-nav">
+  <a href="index.html" title="首頁" aria-label="首頁">⌂</a>
+  <a href="catalog.html" title="目錄" aria-label="目錄">▤</a>
+  <a href="search.html" title="檢索" aria-label="檢索">🔍</a>
+  <a href="sitemap.html" title="地圖" aria-label="網站地圖">🗺</a>
+</div>
+<div class="context-menu" id="context-menu">
+  <a data-ctx="open">↗ 在新分頁開啟</a>
+  <a data-ctx="copy">⧉ 複製連結</a>
+  <a data-ctx="top">↑ 返回頂部</a>
+</div>
+
+<script src="js/books-data.js"></script>
+<script src="js/categories.js"></script>
+<script src="js/books.js"></script>
+<script src="js/site-config.js"></script>
+<script src="js/theme.js"></script>
+<script src="js/layout.js"></script>
+<script src="js/widgets.js"></script>
+<script>
+document.addEventListener("DOMContentLoaded",function(){
+  window.initLayout("關於與授權");
+  window.renderBreadcrumb(["關於與授權"]);
+  window.renderTimeline(document.getElementById("timeline"));
+  window.renderSocial(document.getElementById("social"));
+});
+</script>
+</body>
+</html>

@@ -1,0 +1,18 @@
+# 大型語料與索引（過大、無法上 GitHub，僅本機伺服器使用）
+data/texts/
+data/texts_trad/
+data/search.db
+
+# 原始下載封存
+K091_*.zip
+
+# 備份
+*.orig.bak
+
+# Python
+__pycache__/
+*.pyc
+
+# 系統
+Thumbs.db
+.DS_Store

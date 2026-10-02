@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#2b2720">
+<link rel="icon" href="images/favicon.svg" type="image/svg+xml">
+<link rel="canonical" href="/search.html">
+<title>全文檢索 — 古籍知識庫</title>
+<meta name="description" content="古籍知識庫全文檢索。">
+<link rel="stylesheet" href="css/main.css">
+</head>
+<body>
+
+<header class="site-header" id="site-header"></header>
+
+<div class="container">
+  <nav class="breadcrumb" id="breadcrumb"></nav>
+</div>
+
+<div class="container layout search-page">
+  <main class="main-col">
+    <h1 class="page-title">全文檢索</h1>
+    <p class="lead">在全庫文中搜尋關鍵字。已涵蓋 13,331 部全庫正文（SQLite FTS5 全文檢索）。</p>
+
+    <div class="bigsearch">
+      <input type="text" id="search-input" placeholder="輸入關鍵字，如：君子、道、兵法…" aria-label="檢索關鍵字">
+      <button id="search-go" type="button">搜尋</button>
+    </div>
+
+    <div id="search-results"></div>
+  </main>
+  <aside class="side-col"><div id="sidebar"></div></aside>
+</div>
+
+<footer class="site-footer" id="site-footer"></footer>
+<button class="back-top" id="back-top" aria-label="返回頂部">↑</button>
+<div class="fab-group" id="fab-group">
+  <button class="fab share" id="fab-share" aria-label="分享" title="分享連結">⇪</button>
+  <button class="fab fav" id="fab-fav" aria-label="我的最愛" title="我的最愛">♥</button>
+  <button class="fab top" id="fab-top" aria-label="返回頂部" title="返回頂部">↑</button>
+</div>
+<div class="quick-nav">
+  <a href="index.html" title="首頁" aria-label="首頁">⌂</a>
+  <a href="catalog.html" title="目錄" aria-label="目錄">▤</a>
+  <a href="search.html" title="檢索" aria-label="檢索">🔍</a>
+  <a href="sitemap.html" title="地圖" aria-label="網站地圖">🗺</a>
+</div>
+<div class="context-menu" id="context-menu">
+  <a data-ctx="open">↗ 在新分頁開啟</a>
+  <a data-ctx="copy">⧉ 複製連結</a>
+  <a data-ctx="top">↑ 返回頂部</a>
+</div>
+
+<script src="js/books-data.js"></script>
+<script src="js/categories.js"></script>
+<script src="js/books.js"></script>
+<script src="js/site-config.js"></script>
+<script src="js/theme.js"></script>
+<script src="js/layout.js"></script>
+<script src="js/widgets.js"></script>
+<script src="js/search.js"></script>
+<script>
+document.addEventListener("DOMContentLoaded",function(){
+  window.initLayout("全文檢索");
+  window.renderBreadcrumb(["全文檢索"]);
+  window.initSearchPage();
+});
+</script>
+</body>
+</html>

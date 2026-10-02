@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#2b2720">
+<link rel="icon" href="images/favicon.svg" type="image/svg+xml">
+<link rel="canonical" href="/sitemap.html">
+<title>網站地圖 — 古籍知識庫</title>
+<meta name="description" content="古籍知識庫網站地圖。">
+<link rel="stylesheet" href="css/main.css">
+</head>
+<body>
+
+<header class="site-header" id="site-header"></header>
+
+<div class="container">
+  <nav class="breadcrumb" id="breadcrumb"></nav>
+</div>
+
+<div class="container layout">
+  <main class="main-col">
+    <h1 class="page-title">網站地圖</h1>
+    <p class="lead">站內所有頁面與十藏分類一覽。</p>
+
+    <div class="card">
+      <h2 class="sec">主要頁面</h2>
+      <table class="data">
+        <thead><tr><th>頁面</th><th>說明</th></tr></thead>
+        <tbody>
+          <tr><td><a href="index.html">首頁</a></td><td>十藏入口、最新書目、主題標籤、開始探索</td></tr>
+          <tr><td><a href="catalog.html">書庫目錄</a></td><td>十藏與子類分類瀏覽、三種檢視（卡片／清單／樹狀）、分頁</td></tr>
+          <tr><td><a href="search.html">全文檢索</a></td><td>全庫關鍵字檢索</td></tr>
+          <tr><td><a href="dashboard.html">儀表板</a></td><td>十藏統計、收藏比例、我的最愛</td></tr>
+          <tr><td><a href="contact.html">訂閱與聯絡</a></td><td>電子報訂閱、註冊、聯絡表單</td></tr>
+          <tr><td><a href="book.html?b=周易-5">線上閱讀</a></td><td>書籍詳情、章節目錄、收藏、相關書籍</td></tr>
+          <tr><td><a href="about.html">關於與授權</a></td><td>來源、開放授權、時間軸、社群、捐贈典藏</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="card">
+      <h2 class="sec">十藏分類</h2>
+      <table class="data">
+        <thead><tr><th>藏別</th><th>子類數</th><th>部數</th></tr></thead>
+        <tbody id="sitemap-cats"></tbody>
+      </table>
+    </div>
+  </main>
+  <aside class="side-col"><div id="sidebar"></div></aside>
+</div>
+
+<footer class="site-footer" id="site-footer"></footer>
+<button class="back-top" id="back-top" aria-label="返回頂部">↑</button>
+<div class="fab-group" id="fab-group">
+  <button class="fab share" id="fab-share" aria-label="分享" title="分享連結">⇪</button>
+  <button class="fab fav" id="fab-fav" aria-label="我的最愛" title="我的最愛">♥</button>
+  <button class="fab top" id="fab-top" aria-label="返回頂部" title="返回頂部">↑</button>
+</div>
+<div class="quick-nav">
+  <a href="index.html" title="首頁" aria-label="首頁">⌂</a>
+  <a href="catalog.html" title="目錄" aria-label="目錄">▤</a>
+  <a href="search.html" title="檢索" aria-label="檢索">🔍</a>
+  <a href="sitemap.html" title="地圖" aria-label="網站地圖">🗺</a>
+</div>
+<div class="context-menu" id="context-menu">
+  <a data-ctx="open">↗ 在新分頁開啟</a>
+  <a data-ctx="copy">⧉ 複製連結</a>
+  <a data-ctx="top">↑ 返回頂部</a>
+</div>
+
+<script src="js/books-data.js"></script>
+<script src="js/categories.js"></script>
+<script src="js/books.js"></script>
+<script src="js/site-config.js"></script>
+<script src="js/theme.js"></script>
+<script src="js/layout.js"></script>
+<script src="js/widgets.js"></script>
+<script>
+document.addEventListener("DOMContentLoaded",function(){
+  window.initLayout("網站地圖");
+  window.renderBreadcrumb(["網站地圖"]);
+  var tbody=document.getElementById("sitemap-cats");
+  if(tbody){
+    tbody.innerHTML = window.GUJI_CATS.map(function(c){
+      return '<tr><td><a href="catalog.html?cat='+c.id+'">'+c.name+'</a></td><td>'+c.subs.length+'</td><td>'+c.count+'</td></tr>';
+    }).join("");
+  }
+});
+</script>
+</body>
+</html>

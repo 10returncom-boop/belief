@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#2b2720">
+<link rel="icon" href="images/favicon.svg" type="image/svg+xml">
+<link rel="canonical" href="/dashboard.html">
+<title>儀表板 — 古籍知識庫</title>
+<meta name="description" content="古籍知識庫儀表板：十藏統計與我的最愛。">
+<link rel="stylesheet" href="css/main.css">
+</head>
+<body>
+
+<header class="site-header" id="site-header"></header>
+
+<div class="container">
+  <nav class="breadcrumb" id="breadcrumb"></nav>
+</div>
+
+<div class="container layout">
+  <main class="main-col">
+    <h1 class="page-title">儀表板</h1>
+    <p class="lead">十藏收藏統計、比例與你的「我的最愛」。</p>
+
+    <div class="tabs" data-tabs>
+      <button class="tab-btn active" data-tab-target="stats">📊 十藏統計</button>
+      <button class="tab-btn" data-tab-target="fav">♥ 我的最愛</button>
+    </div>
+
+    <div data-tab-panel="stats" style="display:block;">
+      <div class="card">
+        <h2 class="sec">各藏部數</h2>
+        <div class="stat-grid" id="stat-grid"></div>
+      </div>
+      <div class="card">
+        <h2 class="sec">收藏比例</h2>
+        <div id="bars"></div>
+        <div style="font-size:12px;color:var(--text-soft);margin-top:8px;">佔比 = 各部數 ÷ 全庫 13,331 部</div>
+      </div>
+      <div class="card">
+        <h2 class="sec">子類分布（折疊）</h2>
+        <div id="sub-acc"></div>
+      </div>
+    </div>
+
+    <div data-tab-panel="fav" style="display:none;">
+      <div class="card">
+        <h2 class="sec">我的最愛</h2>
+        <div id="favorites"></div>
+      </div>
+    </div>
+  </main>
+  <aside class="side-col"><div id="sidebar"></div></aside>
+</div>
+
+<footer class="site-footer" id="site-footer"></footer>
+<button class="back-top" id="back-top" aria-label="返回頂部">↑</button>
+<div class="fab-group" id="fab-group">
+  <button class="fab share" id="fab-share" aria-label="分享" title="分享連結">⇪</button>
+  <button class="fab fav" id="fab-fav" aria-label="我的最愛" title="我的最愛">♥</button>
+  <button class="fab top" id="fab-top" aria-label="返回頂部" title="返回頂部">↑</button>
+</div>
+<div class="quick-nav">
+  <a href="index.html" title="首頁" aria-label="首頁">⌂</a>
+  <a href="catalog.html" title="目錄" aria-label="目錄">▤</a>
+  <a href="search.html" title="檢索" aria-label="檢索">🔍</a>
+  <a href="sitemap.html" title="地圖" aria-label="網站地圖">🗺</a>
+</div>
+<div class="context-menu" id="context-menu">
+  <a data-ctx="open">↗ 在新分頁開啟</a>
+  <a data-ctx="copy">⧉ 複製連結</a>
+  <a data-ctx="top">↑ 返回頂部</a>
+</div>
+
+<script src="js/books-data.js"></script>
+<script src="js/categories.js"></script>
+<script src="js/books.js"></script>
+<script src="js/site-config.js"></script>
+<script src="js/theme.js"></script>
+<script src="js/layout.js"></script>
+<script src="js/widgets.js"></script>
+<script>
+document.addEventListener("DOMContentLoaded",function(){
+  window.initLayout("儀表板");
+  window.renderBreadcrumb(["儀表板"]);
+
+  // 統計卡片
+  var grid=document.getElementById("stat-grid");
+  if(grid){
+    grid.innerHTML = window.GUJI_CATS.map(function(c){
+      return '<div class="stat-card hover-lift"><div class="num">'+c.count+'</div><div class="lbl">'+c.name+'</div></div>';
+    }).join("");
+  }
+  // 比例橫條
+  var bars=document.getElementById("bars");
+  if(bars){
+    var max=Math.max.apply(null, window.GUJI_CATS.map(function(c){return c.count;}));
+    bars.innerHTML = window.GUJI_CATS.map(function(c){
+      var pct=Math.round(c.count/window.gujiTotal*100);
+      return '<div class="bar-row"><span class="bl">'+c.name+'</span>'+
+        '<div class="bar-track"><div class="bar-fill" style="width:'+Math.round(c.count/max*100)+'%">'+pct+'%</div></div></div>';
+    }).join("");
+  }
+  // 子類折疊面板
+  var acc=document.getElementById("sub-acc");
+  if(acc){
+    acc.innerHTML = window.GUJI_CATS.map(function(c){
+      var subs=c.subs.map(function(s){
+        return '<span class="tag">'+s.name+' '+s.count+'</span>';
+      }).join("");
+      return '<div class="acc-item"><div class="acc-head">'+c.name+'（'+c.count+' 部）<span class="arrow">›</span></div><div class="acc-body">'+subs+'</div></div>';
+    }).join("");
+  }
+  // 我的最愛
+  window.renderFavorites(document.getElementById("favorites"));
+  // 依 ?view=fav 切換到最愛頁籤
+  if(new URLSearchParams(location.search).get("view")==="fav"){
+    var favBtn=document.querySelector('[data-tab-target="fav"]');
+    if(favBtn) favBtn.click();
+  }
+});
+</script>
+</body>
+</html>

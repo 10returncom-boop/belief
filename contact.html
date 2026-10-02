@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#2b2720">
+<link rel="icon" href="images/favicon.svg" type="image/svg+xml">
+<link rel="canonical" href="/contact.html">
+<title>訂閱與聯絡 — 古籍知識庫</title>
+<meta name="description" content="古籍知識庫訂閱電子報、註冊與聯絡表單。">
+<link rel="stylesheet" href="css/main.css">
+</head>
+<body>
+
+<header class="site-header" id="site-header"></header>
+
+<div class="container">
+  <nav class="breadcrumb" id="breadcrumb"></nav>
+</div>
+
+<div class="container layout">
+  <main class="main-col">
+    <h1 class="page-title">訂閱與聯絡</h1>
+    <p class="lead">訂閱電子報、註冊帳號或與我們聯絡。以下表單為範例（靜態站未接後端）。</p>
+
+    <div class="tabs" data-tabs>
+      <button class="tab-btn active" data-tab-target="subscribe">✉ 電子報訂閱</button>
+      <button class="tab-btn" data-tab-target="register">👤 註冊</button>
+      <button class="tab-btn" data-tab-target="contact">📮 聯絡我們</button>
+    </div>
+
+    <!-- 電子報訂閱 -->
+    <div data-tab-panel="subscribe" class="card form-card" style="display:block;">
+      <h2 class="sec">電子報訂閱</h2>
+      <p class="lead" style="margin-bottom:12px;">訂閱以接收新增書目與捐贈進度通知。</p>
+      <form data-form="subscribe">
+        <div class="form-group"><label>Email <span class="req">*</span></label>
+          <input type="email" name="email" placeholder="you@example.com" required></div>
+        <button class="btn" type="submit">訂閱</button>
+        <div data-form-msg class="form-msg"></div>
+      </form>
+    </div>
+
+    <!-- 註冊 -->
+    <div data-tab-panel="register" class="card form-card" style="display:none;">
+      <h2 class="sec">註冊帳號</h2>
+      <p class="lead" style="margin-bottom:12px;">（範例表單）建立帳號以同步我的最愛與書籤。</p>
+      <form data-form="register">
+        <div class="form-group"><label>姓名 <span class="req">*</span></label>
+          <input type="text" name="name" placeholder="你的姓名" required></div>
+        <div class="form-group"><label>Email <span class="req">*</span></label>
+          <input type="email" name="email" placeholder="you@example.com" required></div>
+        <div class="form-group"><label>密碼 <span class="req">*</span></label>
+          <input type="password" name="pwd" placeholder="至少 6 碼" required minlength="6"></div>
+        <button class="btn" type="submit">註冊</button>
+        <div data-form-msg class="form-msg"></div>
+      </form>
+    </div>
+
+    <!-- 聯絡我們 -->
+    <div data-tab-panel="contact" class="card form-card" style="display:none;">
+      <h2 class="sec">聯絡我們</h2>
+      <form data-form="contact">
+        <div class="form-group"><label>主旨 <span class="req">*</span></label>
+          <input type="text" name="subject" placeholder="主旨" required></div>
+        <div class="form-group"><label>Email <span class="req">*</span></label>
+          <input type="email" name="email" placeholder="you@example.com" required></div>
+        <div class="form-group"><label>訊息 <span class="req">*</span></label>
+          <textarea name="msg" rows="4" placeholder="請輸入訊息…" required></textarea></div>
+        <button class="btn" type="submit">送出</button>
+        <div data-form-msg class="form-msg"></div>
+      </form>
+    </div>
+  </main>
+  <aside class="side-col">
+    <div id="sidebar"></div>
+    <div class="panel">
+      <h3>聯絡資訊</h3>
+      <div class="contact-info">
+        <div class="row"><span class="lbl">Email</span><span class="protected-email" data-email-protect="Y29udGFjdEBndWppLWxpYnJhcnkuZXhhbXBsZQ==" title="點擊顯示">✉ 點擊顯示</span></div>
+      </div>
+      <div id="social" style="margin-top:10px;"></div>
+    </div>
+  </aside>
+</div>
+
+<footer class="site-footer" id="site-footer"></footer>
+<button class="back-top" id="back-top" aria-label="返回頂部">↑</button>
+<div class="fab-group" id="fab-group">
+  <button class="fab share" id="fab-share" aria-label="分享" title="分享連結">⇪</button>
+  <button class="fab fav" id="fab-fav" aria-label="我的最愛" title="我的最愛">♥</button>
+  <button class="fab top" id="fab-top" aria-label="返回頂部" title="返回頂部">↑</button>
+</div>
+<div class="quick-nav">
+  <a href="index.html" title="首頁" aria-label="首頁">⌂</a>
+  <a href="catalog.html" title="目錄" aria-label="目錄">▤</a>
+  <a href="search.html" title="檢索" aria-label="檢索">🔍</a>
+  <a href="sitemap.html" title="地圖" aria-label="網站地圖">🗺</a>
+</div>
+<div class="context-menu" id="context-menu">
+  <a data-ctx="open">↗ 在新分頁開啟</a>
+  <a data-ctx="copy">⧉ 複製連結</a>
+  <a data-ctx="top">↑ 返回頂部</a>
+</div>
+
+<script src="js/books-data.js"></script>
+<script src="js/categories.js"></script>
+<script src="js/books.js"></script>
+<script src="js/site-config.js"></script>
+<script src="js/theme.js"></script>
+<script src="js/layout.js"></script>
+<script src="js/widgets.js"></script>
+<script>
+document.addEventListener("DOMContentLoaded",function(){
+  window.initLayout("訂閱聯絡");
+  window.renderBreadcrumb(["訂閱與聯絡"]);
+  window.renderSocial(document.getElementById("social"));
+});
+</script>
+</body>
+</html>

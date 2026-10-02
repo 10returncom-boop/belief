@@ -1,0 +1,13 @@
+{
+  "_note": "古籍知識庫書目資料。目前為範例示意；真實 10,293 部 TXT 匯入後，以此結構擴充並交由後端/服務端建置全文索引。欄位：id, title, author, dynasty, cat(藏別id), sub(子類), desc, source, file(相對路徑)",
+  "total_books": 10293,
+  "sample_count": 6,
+  "books": [
+    {"id":"zhouyi","title":"周易","author":"佚名","dynasty":"先秦","cat":"yi","sub":"易經","file":"01易藏-0195部/01易经-49部/周易.txt"},
+    {"id":"lunyu","title":"論語","author":"孔子弟子","dynasty":"先秦","cat":"ru","sub":"四書","file":"02儒藏-0370部/07四书-27部/論語.txt"},
+    {"id":"daodejing","title":"道德經","author":"老子","dynasty":"春秋","cat":"dao","sub":"藏外","file":"03道藏-1689部/09藏外-186种/道德經.txt"},
+    {"id":"jin'gangjing","title":"金剛般若波羅蜜經","author":"鳩摩羅什譯","dynasty":"後秦","cat":"fo","sub":"大藏經","file":"04佛藏-5159部/01大藏经-2432部/經藏-1481部/金剛經.txt"},
+    {"id":"sunzi","title":"孫子兵法","author":"孫武","dynasty":"春秋","cat":"zi","sub":"兵家","file":"05子藏-1155部/02兵家-53部/孫子兵法.txt"},
+    {"id":"shiji","title":"史記","author":"司馬遷","dynasty":"西漢","cat":"shi","sub":"正史","file":"06史藏-1725部/01正史-34部/史記.txt"}
+  ]
+}

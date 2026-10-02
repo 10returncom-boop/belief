@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#2b2720">
+<link rel="icon" href="images/favicon.svg" type="image/svg+xml">
+<link rel="canonical" href="/index.html">
+<title>古籍知識庫 — 首頁</title>
+<meta name="description" content="免費公開古籍知識庫：十藏，約一萬三千部古典文獻全文檢索與線上閱讀。">
+<link rel="stylesheet" href="css/main.css">
+</head>
+<body>
+
+<header class="site-header" id="site-header"></header>
+
+<div class="container">
+  <nav class="breadcrumb" id="breadcrumb"></nav>
+</div>
+
+<div class="container layout">
+  <main class="main-col">
+    <div class="card">
+      <h1 class="page-title">古籍知識庫</h1>
+      <p class="lead">匯集《易》《儒》《道》《佛》《子》《史》十藏古典文獻，免費公開、全文檢索、線上閱讀，並捐贈典藏予學術機構。全庫約 <b>13,331 部</b>。</p>
+      <p class="lead" style="margin-top:8px;">已收錄 <span id="bookcount">13,331</span> 部真實文本（來源：殆知閣公版資料庫），全文檢索與線上閱讀已上線；<b>線上閱讀請以本機伺服器開啟</b>（<code>python serve.py</code> → <code>http://127.0.0.1:8000</code>）。</p>
+    </div>
+
+    <h2 class="sec">十藏分類</h2>
+    <div class="cat-grid" id="home-cats"></div>
+
+    <div class="lazy-section" style="display:flex;flex-wrap:wrap;gap:24px;">
+      <div style="flex:1 1 46%;min-width:260px;" class="card">
+        <h2 class="sec">最新書目</h2>
+        <div id="latest"></div>
+      </div>
+      <div style="flex:1 1 46%;min-width:260px;" class="card">
+        <h2 class="sec">熱門主題</h2>
+        <div id="tagcloud" class="tag-cloud"></div>
+      </div>
+    </div>
+
+    <h2 class="sec">開始探索</h2>
+    <div class="card">
+      <p class="lead">🔍 <a href="search.html"><b>全文檢索</b></a> — 在全庫文中搜尋關鍵字<br>
+      📖 <a href="book.html?b=周易-5"><b>線上閱讀</b></a> — 章節目錄、正文切換<br>
+      🗂 <a href="catalog.html"><b>書庫目錄</b></a> — 依十藏與子類瀏覽（卡片／清單／樹狀三種檢視）<br>
+      📊 <a href="dashboard.html"><b>儀表板</b></a> — 十藏統計與我的最愛<br>
+      ✉ <a href="contact.html"><b>訂閱與聯絡</b></a> — 電子報與表單<br>
+      🏛 <a href="about.html"><b>關於與授權</b></a> — 來源、開放授權與捐贈說明</p>
+    </div>
+  </main>
+
+  <aside class="side-col"><div id="sidebar"></div></aside>
+</div>
+
+<footer class="site-footer" id="site-footer"></footer>
+
+<button class="back-top" id="back-top" aria-label="返回頂部">↑</button>
+<div class="fab-group" id="fab-group">
+  <button class="fab share" id="fab-share" aria-label="分享" title="分享連結">⇪</button>
+  <button class="fab fav" id="fab-fav" aria-label="我的最愛" title="我的最愛">♥</button>
+  <button class="fab top" id="fab-top" aria-label="返回頂部" title="返回頂部">↑</button>
+</div>
+<div class="quick-nav">
+  <a href="index.html" title="首頁" aria-label="首頁">⌂</a>
+  <a href="catalog.html" title="目錄" aria-label="目錄">▤</a>
+  <a href="search.html" title="檢索" aria-label="檢索">🔍</a>
+  <a href="sitemap.html" title="地圖" aria-label="網站地圖">🗺</a>
+</div>
+<div class="context-menu" id="context-menu">
+  <a data-ctx="open">↗ 在新分頁開啟</a>
+  <a data-ctx="copy">⧉ 複製連結</a>
+  <a data-ctx="top">↑ 返回頂部</a>
+</div>
+
+<script src="js/books-data.js"></script>
+<script src="js/categories.js"></script>
+<script src="js/books.js"></script>
+<script src="js/site-config.js"></script>
+<script src="js/theme.js"></script>
+<script src="js/layout.js"></script>
+<script src="js/widgets.js"></script>
+<script>
+document.addEventListener("DOMContentLoaded",function(){
+  window.initLayout("首頁");
+  window.renderBreadcrumb([]);
+  var grid=document.getElementById("home-cats");
+  if(grid){
+    grid.innerHTML = window.GUJI_CATS.map(function(c){
+      return '<a class="cat-card hover-lift" data-context data-page-url="catalog.html?cat='+c.id+'" href="catalog.html?cat='+c.id+'">'+
+        '<div class="cname">'+c.name+'</div>'+
+        '<div class="cnum">'+c.count+' 部</div>'+
+        '<div class="cdesc">'+c.desc+'</div></a>';
+    }).join("");
+  }
+  window.renderLatest(document.getElementById("latest"), 5);
+  window.renderTagCloud(document.getElementById("tagcloud"));
+  var bc=document.getElementById("bookcount");
+  if(bc && window.GUJI_BOOKS){ bc.textContent=window.GUJI_BOOKS.length; }
+});
+</script>
+</body>
+</html>
