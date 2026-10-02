@@ -1,0 +1,8 @@
+# 備份與截圖（非網站本體，不發布）
+_backup/
+_shots/
+
+# 作業系統
+Thumbs.db
+Desktop.ini
+.DS_Store

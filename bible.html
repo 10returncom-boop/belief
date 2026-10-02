@@ -1,0 +1,1157 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Bible 聖經知識網站｜史上最強聖經與功能文章平台</title>
+<meta name="description" content="收錄舊約新約66卷聖經書庫、精選經文、章節閱讀、全文搜尋、讀經計畫與主題文章——聖經Bible聖經知識與相關功能網站。">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Crect width='24' height='24' rx='6' fill='%231f2a44'/%3E%3Cpath d='M12 5c-2-1.5-4.5-2-7-2v16c2.5 0 5 .5 7 2 2-1.5 4.5-2 7-2V3c-2.5 0-5 .5-7 2z' fill='none' stroke='%23c9a45c' stroke-width='1.4'/%3E%3Cpath d='M12 5v16' fill='none' stroke='%23c9a45c' stroke-width='1.4'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://miaoda.feishu.cn">
+<link rel="stylesheet" href="https://miaoda.feishu.cn/fonts/css2?family=Noto+Serif+TC:wght@400;600;700;900&family=Noto+Sans+TC:wght@300;400;500;700&display=swap">
+<style>
+  :root{
+    --ink:#1d2733;
+    --ink-soft:#5b6b7c;
+    --parch:#f7f1e3;
+    --parch-2:#efe4cd;
+    --navy:#1f2a44;
+    --navy-2:#2e3d63;
+    --gold:#b58a3c;
+    --gold-2:#c9a45c;
+    --crimson:#8c2f39;
+    --line:#d8c9a8;
+    --card:#fffdf6;
+    --shadow:0 10px 30px rgba(31,42,68,.10);
+    --radius:14px;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:auto}
+  body{
+    font-family:"Noto Sans TC","Noto Sans SC","PingFang TC","Microsoft JhengHei",system-ui,sans-serif;
+    color:var(--ink);
+    background:var(--parch);
+    line-height:1.75;
+    -webkit-font-smoothing:antialiased;
+  }
+  h1,h2,h3,h4,.serif{font-family:"Noto Serif TC","Noto Serif SC","Songti TC",serif}
+  a{color:inherit;text-decoration:none}
+  .wrap{max-width:1200px;margin:0 auto;padding:0 24px}
+  /* ===== 頂欄 ===== */
+  header.top{
+    position:sticky;top:0;z-index:50;
+    background:rgba(247,241,227,.92);backdrop-filter:blur(8px);
+    border-bottom:1px solid var(--line);
+  }
+  .nav{display:flex;align-items:center;gap:22px;padding:14px 0;flex-wrap:wrap}
+  .brand{display:flex;align-items:center;gap:10px;font-weight:700;font-size:1.15rem;color:var(--navy)}
+  .brand .emblem{width:38px;height:38px;border-radius:10px;background:var(--navy);display:flex;align-items:center;justify-content:center;color:var(--gold-2)}
+  .nav-links{display:flex;gap:4px;flex-wrap:wrap}
+  .nav-links a{
+    padding:8px 14px;border-radius:9px;font-size:.95rem;color:var(--ink-soft);
+    transition:background .2s,color .2s;
+  }
+  .nav-links a:hover{background:var(--parch-2);color:var(--navy)}
+  .nav-links a.active{background:var(--navy);color:#f7f1e3}
+  .nav-search{margin-left:auto;display:flex;gap:8px;align-items:center}
+  .nav-search input{
+    padding:8px 14px;border:1px solid var(--line);border-radius:20px;
+    background:var(--card);font-size:.92rem;width:220px;color:var(--ink);outline:none;
+    font-family:inherit;
+  }
+  .nav-search input:focus{border-color:var(--gold)}
+  /* ===== 視圖容器 ===== */
+  main{min-height:72vh;padding:34px 0 60px}
+  .view{display:none;animation:fade .35s ease}
+  .view.on{display:block}
+  @keyframes fade{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
+  /* ===== 首頁 hero ===== */
+  .hero{
+    position:relative;overflow:hidden;border-radius:20px;
+    background:linear-gradient(135deg,var(--navy) 0%,var(--navy-2) 100%);
+    color:#f7f1e3;padding:64px 56px;margin-bottom:36px;
+    box-shadow:var(--shadow);
+  }
+  .hero::before{
+    content:"";position:absolute;inset:0;
+    background-image:url("assets/hero-bible.jpg");
+    background-size:cover;background-position:center 42%;
+    opacity:.9;
+  }
+  .hero::after{
+    content:"";position:absolute;inset:0;
+    background:linear-gradient(100deg,rgba(23,31,49,.92) 0%,rgba(23,31,49,.72) 45%,rgba(23,31,49,.35) 100%);
+  }
+  .hero .hero-inner{position:relative;z-index:2}
+  .hero .orn{position:absolute;right:-30px;top:-40px;opacity:.14;width:360px;height:360px}
+  .hero .kicker{letter-spacing:.32em;font-size:.8rem;color:var(--gold-2);margin-bottom:14px;font-weight:500}
+  .hero h1{font-size:clamp(1.9rem,4vw,3.2rem);line-height:1.25;font-weight:900;margin-bottom:16px;text-wrap:balance}
+  .hero p.sub{font-size:clamp(1rem,1.6vw,1.22rem);max-width:640px;color:#d8cdb8;margin-bottom:28px;font-weight:300}
+  .hero .stats{display:flex;flex-wrap:wrap;gap:30px;margin-bottom:8px}
+  .hero .stat .num{font-size:1.9rem;font-weight:900;color:var(--gold-2);font-family:"Noto Serif TC",serif}
+  .hero .stat .lbl{font-size:.86rem;color:#bfb196}
+  .hero-actions{display:flex;gap:12px;margin-top:26px;flex-wrap:wrap}
+  .btn{
+    display:inline-flex;align-items:center;gap:8px;padding:12px 22px;border-radius:11px;
+    font-weight:600;font-size:.98rem;cursor:pointer;border:1px solid transparent;
+    transition:transform .15s,box-shadow .2s,background .2s;font-family:inherit;
+  }
+  .btn:hover{transform:translateY(-2px)}
+  .btn-gold{background:var(--gold);color:#fffdf6;box-shadow:0 6px 18px rgba(181,138,60,.4)}
+  .btn-gold:hover{background:var(--gold-2)}
+  .btn-ghost{background:transparent;color:#f7f1e3;border-color:rgba(247,241,227,.5)}
+  .btn-ghost:hover{background:rgba(247,241,227,.12)}
+  .btn-navy{background:var(--navy);color:#f7f1e3}
+  .btn-navy:hover{background:var(--navy-2)}
+  .btn-line{background:var(--card);color:var(--navy);border-color:var(--line)}
+  .btn-line:hover{border-color:var(--gold);color:var(--navy)}
+  /* ===== 通用區塊 ===== */
+  .sec-title{font-size:1.6rem;font-weight:800;color:var(--navy);margin-bottom:6px}
+  .sec-sub{color:var(--ink-soft);margin-bottom:24px}
+  .grid{display:grid;gap:20px}
+  .g4{grid-template-columns:repeat(4,1fr)}
+  .g3{grid-template-columns:repeat(3,1fr)}
+  .g2{grid-template-columns:repeat(2,1fr)}
+  .card{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:22px;box-shadow:0 4px 14px rgba(31,42,68,.05);cursor:pointer;transition:transform .18s,box-shadow .2s,border-color .2s}
+  .card:hover{transform:translateY(-4px);box-shadow:var(--shadow);border-color:var(--gold-2)}
+  .card h3{font-size:1.15rem;color:var(--navy);margin-bottom:6px}
+  .card p{font-size:.92rem;color:var(--ink-soft)}
+  .tag{display:inline-block;padding:3px 11px;border-radius:20px;font-size:.75rem;font-weight:500;background:var(--parch-2);color:var(--navy);margin-right:6px;margin-bottom:8px}
+  .tag.gold{background:rgba(181,138,60,.18);color:#8a6520}
+  .tag.navy{background:rgba(31,42,68,.12);color:var(--navy)}
+  .tag.crimson{background:rgba(140,47,57,.12);color:var(--crimson)}
+  .section{margin-bottom:40px}
+  /* ===== 書卷導覽 ===== */
+  .book-filter{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:22px}
+  .book-filter button{padding:8px 16px;border-radius:20px;border:1px solid var(--line);background:var(--card);cursor:pointer;font-size:.9rem;font-family:inherit;color:var(--ink-soft);transition:all .15s}
+  .book-filter button.active{background:var(--navy);color:#f7f1e3;border-color:var(--navy)}
+  .book-group-title{font-size:1.25rem;font-weight:800;color:var(--crimson);margin:26px 0 14px;display:flex;align-items:center;gap:10px}
+  .book-group-title::after{content:"";flex:1;height:1px;background:var(--line)}
+  .book-card .bnum{font-size:.78rem;color:var(--gold);font-weight:700;letter-spacing:.08em}
+  .book-card h3{font-size:1.2rem}
+  .book-card .meta{font-size:.8rem;color:var(--ink-soft);margin-top:6px}
+  /* ===== 閱讀器 ===== */
+  .reader-picker{display:flex;gap:14px;flex-wrap:wrap;align-items:center;margin-bottom:24px}
+  .picker{display:flex;flex-direction:column;gap:6px}
+  .picker label{font-size:.82rem;color:var(--ink-soft);font-weight:600}
+  select{
+    padding:10px 14px;border:1px solid var(--line);border-radius:10px;background:var(--card);
+    font-size:.95rem;color:var(--ink);font-family:inherit;outline:none;min-width:220px;
+  }
+  select:focus{border-color:var(--gold)}
+  .reader{
+    background:var(--card);border:1px solid var(--line);border-radius:18px;
+    padding:40px 48px;box-shadow:var(--shadow);max-width:820px;margin:0 auto;
+  }
+  .reader .rhead{text-align:center;border-bottom:1px solid var(--line);padding-bottom:20px;margin-bottom:28px}
+  .reader .rhead .ref{font-size:1.6rem;font-weight:900;color:var(--navy)}
+  .reader .rhead .tname{font-size:.9rem;color:var(--gold);letter-spacing:.1em;font-weight:600}
+  .verse{display:flex;gap:14px;margin-bottom:18px}
+  .rchaphead{text-align:center;font-size:1.15rem;font-weight:700;color:var(--navy);font-family:"Noto Serif TC","Songti TC",serif;margin:0 auto 26px;padding:10px 18px;border-top:1px dashed var(--line);border-bottom:1px dashed var(--line);max-width:620px}
+  .verse .vnum{font-size:.82rem;font-weight:700;color:var(--gold);min-width:26px;text-align:right;padding-top:6px}
+  .verse .vtext{font-size:1.06rem;font-family:"Noto Serif TC","Songti TC",serif;color:#2c3a4d;flex:1}
+  .reader-nav{display:flex;justify-content:space-between;align-items:center;margin-top:32px;padding-top:20px;border-top:1px solid var(--line)}
+  .reader-nav .btn{padding:10px 18px;font-size:.92rem}
+  .bookmark-btn{background:transparent;border:1px solid var(--line);border-radius:10px;padding:9px 16px;cursor:pointer;color:var(--navy);font-size:.9rem;font-family:inherit}
+  .bookmark-btn.on{background:var(--navy);color:#f7f1e3;border-color:var(--navy)}
+  /* ===== 經文 ===== */
+  .verse-block{background:var(--card);border:1px solid var(--line);border-left:4px solid var(--gold);border-radius:12px;padding:18px 22px;margin-bottom:16px}
+  .verse-block .ref{font-weight:700;color:var(--navy);font-size:.9rem;margin-bottom:6px}
+  .verse-block .txt{font-family:"Noto Serif TC",serif;font-size:1rem;color:#2c3a4d;font-style:italic}
+  /* ===== 搜尋 ===== */
+  .search-box{display:flex;gap:10px;max-width:640px;margin-bottom:28px}
+  .search-box input{flex:1;padding:14px 18px;border:1px solid var(--line);border-radius:12px;background:var(--card);font-size:1rem;font-family:inherit;color:var(--ink);outline:none}
+  .search-box input:focus{border-color:var(--gold)}
+  .search-box button{padding:0 24px;border-radius:12px;border:none;background:var(--gold);color:#fffdf6;font-weight:600;cursor:pointer;font-size:1rem}
+  .result-item{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:16px 20px;margin-bottom:12px;cursor:pointer;transition:border-color .15s}
+  .result-item:hover{border-color:var(--gold-2)}
+  .result-item .rtype{font-size:.74rem;font-weight:700;letter-spacing:.08em}
+  .result-item .rtitle{font-weight:700;color:var(--navy);margin:4px 0}
+  .result-item .rsnip{font-size:.9rem;color:var(--ink-soft)}
+  .empty{color:var(--ink-soft);text-align:center;padding:48px 0}
+  /* ===== 文章 ===== */
+  .article-card h3{font-size:1.15rem}
+  .article-card .excerpt{font-size:.92rem;color:var(--ink-soft);margin-top:8px}
+  .article-body{max-width:760px;margin:0 auto;background:var(--card);border:1px solid var(--line);border-radius:18px;padding:44px 52px;box-shadow:var(--shadow)}
+  .article-body h1{font-size:1.9rem;color:var(--navy);margin-bottom:10px}
+  .article-body .ameta{color:var(--ink-soft);font-size:.9rem;margin-bottom:26px;padding-bottom:18px;border-bottom:1px solid var(--line)}
+  .article-body h2{font-size:1.3rem;color:var(--navy);margin:28px 0 12px}
+  .article-body h3{font-size:1.12rem;color:var(--navy-2);margin:22px 0 10px}
+  .article-body p{margin-bottom:16px}
+  .article-body ul,.article-body ol{margin:0 0 16px 24px}
+  .article-body li{margin-bottom:8px}
+  .article-body blockquote{border-left:4px solid var(--gold);padding:12px 20px;background:var(--parch);margin:18px 0;color:var(--navy-2);font-family:"Noto Serif TC",serif;font-style:italic;border-radius:8px}
+  .article-body .verse-q{color:var(--crimson);font-weight:600}
+  /* ===== 統計圖表 ===== */
+  .chart-card{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:24px;box-shadow:0 4px 14px rgba(31,42,68,.05)}
+  .chart-card h3{color:var(--navy);margin-bottom:4px}
+  .chart-card p{color:var(--ink-soft);font-size:.88rem;margin-bottom:14px}
+  .chart-box{width:100%;height:340px}
+  /* ===== 書籤 ===== */
+  .bm-list .bm-item{display:flex;align-items:center;justify-content:space-between;gap:16px;background:var(--card);border:1px solid var(--line);border-radius:12px;padding:16px 20px;margin-bottom:12px}
+  .bm-item .bmtitle{font-weight:700;color:var(--navy)}
+  .bm-item .bmmeta{font-size:.85rem;color:var(--ink-soft)}
+  .bm-item button{background:var(--crimson);color:#fff;border:none;border-radius:9px;padding:7px 14px;cursor:pointer;font-family:inherit;font-size:.86rem}
+  /* ===== 頁腳 ===== */
+  footer{background:var(--navy);color:#bfb196;padding:36px 0;text-align:center;font-size:.9rem}
+  footer .f-title{font-size:1.1rem;color:#f7f1e3;font-weight:700;margin-bottom:8px}
+  /* ===== 響應式 ===== */
+  @media(max-width:900px){.g4{grid-template-columns:repeat(2,1fr)}.g3{grid-template-columns:repeat(2,1fr)}.g2{grid-template-columns:1fr}}
+  @media(max-width:620px){
+    .g4,.g3{grid-template-columns:1fr}
+    .nav-search input{width:150px}
+    .hero{padding:40px 26px}
+    .reader{padding:28px 20px}
+    .article-body{padding:30px 24px}
+    .nav-links a{padding:11px 14px;font-size:.95rem;min-height:44px;display:inline-flex;align-items:center}
+    .nav{flex-direction:column;align-items:flex-start;gap:12px}
+    .nav-search{margin-left:0;width:100%}
+    .nav-search input{flex:1;width:auto;font-size:16px}
+    .nav-search .btn{padding:11px 16px;font-size:.95rem;min-height:44px}
+    .chart-box{height:300px}
+    body{font-size:16px}
+    .card p,.verse-block .txt,.book-card .meta,.excerpt,.result-item .rsnip{font-size:.95rem}
+    .book-filter button,.book-filter button.active{font-size:.92rem;padding:10px 15px;min-height:44px}
+    .picker select{font-size:16px}
+    .bm-item .bmmeta{font-size:.9rem}
+    footer p{font-size:.9rem}
+    .kicker{font-size:.85rem;letter-spacing:.2em}
+    .hero .stat .lbl{font-size:.95rem}
+    .sec-sub{font-size:1rem}
+  }
+</style>
+<!-- ECharts 5.6.0（jsDelivr 白名單 + SRI） -->
+<script src="https://cdn.jsdelivr.net/npm/echarts@5.6.0/dist/echarts.min.js" integrity="sha384-pPi0zxBAoDu6+JXW/C68UZLvBUUtU+7zonhif43rqj7pxsGyqyqzcian2Rj37Rss" crossorigin="anonymous"></script>
+<!-- 和合本繁體(新標點)公有領域 逐節經文資料：66卷 1189章 31021節 -->
+<script src="assets/bible_text.js"></script>
+</head>
+<body>
+
+<header class="top">
+  <div class="wrap nav">
+    <div class="brand">
+      <span class="emblem">
+        <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M12 5c-2-1.5-4.5-2-7-2v16c2.5 0 5 .5 7 2 2-1.5 4.5-2 7-2V3c-2.5 0-5 .5-7 2z"/><path d="M12 5v16"/></svg>
+      </span>
+      <span>Bible 聖經知識網站</span>
+    </div>
+    <nav class="nav-links" id="navLinks"></nav>
+    <div class="nav-search">
+      <input id="navSearchInput" type="search" placeholder="搜尋經文、書卷、文章…">
+      <button class="btn btn-gold" id="navSearchBtn" style="padding:8px 16px;font-size:.88rem">搜尋</button>
+    </div>
+  </div>
+</header>
+
+<main class="wrap" id="app"></main>
+
+<footer>
+  <div class="wrap">
+    <div class="f-title">Bible 聖經知識網站</div>
+    <p>收錄舊約 39 卷、新約 27 卷，共 66 卷聖經書庫｜精選經文｜章節閱讀｜全文搜尋｜讀經計畫與主題文章</p>
+    <p style="margin-top:6px;font-size:.82rem">經文引用以中文和合本為參考基礎，部分為節錄。本站為知識整理用途。</p>
+  </div>
+</footer>
+
+<!-- ===== 視圖掛載點 ===== -->
+<div id="viewMount" style="display:none"></div>
+
+<!-- ===== 資料與邏輯 ===== -->
+<script>
+/* =========================================================
+   資料區：66卷書庫、精選經文、功能文章
+   ========================================================= */
+const OT = [
+  {id:1, name:"創世記", en:"Genesis", grp:"摩西五經", ch:50, author:"摩西", era:"約主前1440–1400年", theme:"萬物的起源、上帝的揀選與應許", key:"起初，上帝創造天地。",
+   summary:"記述上帝創造天地、人類墮落、洪水與巴別塔，以及亞伯拉罕、以撒、雅各、約瑟四位族長的故事，是整本聖經的根基。"},
+  {id:2, name:"出埃及記", en:"Exodus", grp:"摩西五經", ch:40, author:"摩西", era:"約主前1440–1400年", theme:"上帝的救贖、十誡與會幕", key:"我是耶和華你的上帝，曾將你從埃及地為奴之家領出來。",
+   summary:"記載以色列民在埃及受苦、摩西蒙召、十災、過紅海、曠野飄流與西奈山頒布十誡，彰顯上帝的救贖大能。"},
+  {id:3, name:"利未記", en:"Leviticus", grp:"摩西五經", ch:27, author:"摩西", era:"約主前1440–1400年", theme:"聖潔、獻祭與敬拜條例", key:"你們要聖潔，因為我耶和華你們的上帝是聖潔的。",
+   summary:"詳列獻祭、祭司職分、潔淨與聖潔生活的條例，教導以色列民如何與聖潔的上帝同住。"},
+  {id:4, name:"民數記", en:"Numbers", grp:"摩西五經", ch:36, author:"摩西", era:"約主前1440–1400年", theme:"曠野飄流與信心的功課", key:"耶和華曉諭摩西說：你曉諭亞倫和他兒子並以色列眾人。",
+   summary:"記載以色列民在西奈曠野四十年的飄流，兩次數點百姓，以及悖逆與信心的對比。"},
+  {id:5, name:"申命記", en:"Deuteronomy", grp:"摩西五經", ch:34, author:"摩西", era:"約主前1400年", theme:"重申律法與上帝的愛", key:"你要盡心、盡性、盡力愛耶和華你的上帝。",
+   summary:"摩西在摩押平原向新一代以色列民重申律法，呼籲他們專一愛上帝、遵守誡命。"},
+  {id:6, name:"約書亞記", en:"Joshua", grp:"歷史書", ch:24, author:"約書亞", era:"約主前1400–1370年", theme:"進入應許之地與征服迦南", key:"至於我和我家，我們必定事奉耶和華。",
+   summary:"約書亞帶領以色列民渡約旦河進入應許之地，征服迦南並分地定居，見證上帝信實守約。"},
+  {id:7, name:"士師記", en:"Judges", grp:"歷史書", ch:21, author:"不詳", era:"約主前1370–1050年", theme:"循環背道與上帝的拯救", key:"那時以色列中沒有王，各人任意而行。",
+   summary:"記載以色列民在士師時期反覆離棄上帝、受苦、悔改、蒙拯救的循環，顯明人的軟弱與上帝的憐憫。"},
+  {id:8, name:"路得記", en:"Ruth", grp:"歷史書", ch:4, author:"不詳", era:"約主前1050年", theme:"忠誠、恩典與救贖", key:"你無論往哪裡去，我也往那裡去。",
+   summary:"摩押女子路得對婆婆拿俄米的忠誠，蒙波阿斯救贖，成為大衛與耶穌的先祖，預表救贖之恩。"},
+  {id:9, name:"撒母耳記上", en:"1 Samuel", grp:"歷史書", ch:31, author:"撒母耳等", era:"約主前1050–970年", theme:"君王制度的興起", key:"聽命勝於獻祭；順從勝於公羊的脂油。",
+   summary:"記述撒母耳的興起、掃羅的立王與失敗，以及大衛的被膏與受逼迫，交織上帝的主權與人的順服。"},
+  {id:10, name:"撒母耳記下", en:"2 Samuel", grp:"歷史書", ch:24, author:"不詳", era:"約主前970年", theme:"大衛的王朝與上帝的恩典", key:"他使我的腳快如母鹿的蹄，又使我在高處安穩。",
+   summary:"記述大衛作王後統一全國、建立耶路撒冷，及其犯罪與悔改，顯明上帝的恩典與管教。"},
+  {id:11, name:"列王紀上", en:"1 Kings", grp:"歷史書", ch:22, author:"不詳", era:"約主前900年", theme:"所羅門的榮耀與王國分裂", key:"你當剛強壯膽，不要懼怕。",
+   summary:"記述所羅門的智慧與聖殿建造，王國分裂為南北兩國，以及先知以利亞的見證。"},
+  {id:12, name:"列王紀下", en:"2 Kings", grp:"歷史書", ch:25, author:"不詳", era:"約主前550年", theme:"南北國的衰亡與上帝的忍耐", key:"耶和華是公義的；他丟棄了我的眾百姓嗎？",
+   summary:"記述南北兩國因背逆上帝而相繼亡國，以色列被亞述滅、猶大被巴比倫滅，先知以利沙的作為。"},
+  {id:13, name:"歷代志上", en:"1 Chronicles", grp:"歷史書", ch:29, author:"以斯拉", era:"約主前450年", theme:"大衛王朝與聖殿", key:"我若在王眼前蒙恩，願王派我往猶大建造殿宇。",
+   summary:"從祭司視角重述以色列家譜與大衛王朝，聚焦聖殿與敬拜，盼望被擄歸回的更新。"},
+  {id:14, name:"歷代志下", en:"2 Chronicles", grp:"歷史書", ch:36, author:"以斯拉", era:"約主前450年", theme:"猶大諸王與聖殿敬拜", key:"這稱為我名下的子民，若自卑、禱告、尋求我的面，我必從天上垂聽。",
+   summary:"記述猶大諸王對聖殿與敬拜的態度，好的王蒙福、背道的王受苦，終至被擄與歸回的應許。"},
+  {id:15, name:"以斯拉記", en:"Ezra", grp:"歷史書", ch:10, author:"以斯拉", era:"約主前450年", theme:"回歸重建與律法復興", key:"以斯拉定志考究遵行耶和華的律法。",
+   summary:"記述被擄歸回的猶太人在所羅巴伯與以斯拉帶領下重建聖殿與復興律法。"},
+  {id:16, name:"尼希米記", en:"Nehemiah", grp:"歷史書", ch:13, author:"尼希米", era:"約主前430年", theme:"重建城牆與社會改革", key:"我們就做工，一半拿兵器。",
+   summary:"尼希米帶領百姓重建耶路撒冷城牆，並推動社會與信仰的改革。"},
+  {id:17, name:"以斯帖記", en:"Esther", grp:"歷史書", ch:10, author:"不詳", era:"約主前470年", theme:"上帝的隱藏護佑", key:"你莫想王宮裡就你一個人的性命比猶大眾人存活。",
+   summary:"記述王后以斯帖冒死拯救猶太民族脫離滅族危機，顯明上帝在幕後的奇妙護佑。"},
+  {id:18, name:"約伯記", en:"Job", grp:"詩歌智慧書", ch:42, author:"不詳", era:"古遠時期", theme:"苦難與上帝的公義", key:"我知道我的救贖主活著，末了必站立在地上。",
+   summary:"探討義人受苦之謎，約伯在極大苦難中持守信心，最終經歷上帝更大的啟示與恢復。"},
+  {id:19, name:"詩篇", en:"Psalms", grp:"詩歌智慧書", ch:150, author:"大衛等", era:"約主前1000–450年", theme:"讚美、哀歌與信心", key:"耶和華是我的牧者，我必不致缺乏。",
+   summary:"150篇詩歌涵蓋讚美、感恩、哀訴、君王與朝聖詩，是禱告與敬拜的寶庫。"},
+  {id:20, name:"箴言", en:"Proverbs", grp:"詩歌智慧書", ch:31, author:"所羅門等", era:"約主前950年", theme:"敬畏上帝的處世智慧", key:"敬畏耶和華是智慧的開端。",
+   summary:"以格言教導敬畏上帝、謙卑、勤勉、言語與家庭生活的實用智慧。"},
+  {id:21, name:"傳道書", en:"Ecclesiastes", grp:"詩歌智慧書", ch:12, author:"所羅門", era:"約主前935年", theme:"虛空與敬畏上帝", key:"虛空的虛空，凡事都是虛空。",
+   summary:"在日光之下追尋人生意義，最終結論是敬畏上帝、謹守誡命乃人生之本。"},
+  {id:22, name:"雅歌", en:"Song of Songs", grp:"詩歌智慧書", ch:8, author:"所羅門", era:"約主前965年", theme:"愛情的頌歌", key:"愛情如死之堅強，嫉恨如陰間之殘忍。",
+   summary:"以詩歌描繪男女之間純潔堅貞的愛情，也寓意基督與教會的愛。"},
+  {id:23, name:"以賽亞書", en:"Isaiah", grp:"大先知書", ch:66, author:"以賽亞", era:"約主前740–680年", theme:"審判與彌賽亞的盼望", key:"因有一嬰孩為我們而生，有一子賜給我們。",
+   summary:"先知以賽亞宣告上帝對猶大的審判與安慰，預言彌賽亞的降生、受苦與榮耀國度。"},
+  {id:24, name:"耶利米書", en:"Jeremiah", grp:"大先知書", ch:52, author:"耶利米", era:"約主前627–580年", theme:"流淚的先知與新約應許", key:"我知道我向你們所懷的意念是賜平安的意念。",
+   summary:"先知耶利米在猶大亡國前夕傳講悔改，也預言上帝將賜下新約與復興。"},
+  {id:25, name:"耶利米哀歌", en:"Lamentations", grp:"大先知書", ch:5, author:"耶利米", era:"約主前586年", theme:"耶路撒冷的悲歌與上帝的憐憫", key:"耶和華的慈愛不至斷絕，他的憐憫不至窮盡。",
+   summary:"為耶路撒冷被毀哀哭的五首詩歌，卻在絕望中仰望上帝每日的憐憫。"},
+  {id:26, name:"以西結書", en:"Ezekiel", grp:"大先知書", ch:48, author:"以西結", era:"約主前593–570年", theme:"上帝的榮耀與新的聖殿", key:"我要賜給你們一個新心，將新靈放在你們裡面。",
+   summary:"先知以西結在被擄之地看見上帝的榮耀、宣告審判，並預言新心與新聖殿的復興異象。"},
+  {id:27, name:"但以理書", en:"Daniel", grp:"大先知書", ch:12, author:"但以理", era:"約主前605–535年", theme:"上帝的主權與末世異象", key:"認識你的子民，必剛強行事。",
+   summary:"但以理在巴比倫與波斯宮廷見證上帝的主權，並領受關乎列國與末世的啟示異象。"},
+  {id:28, name:"何西阿書", en:"Hosea", grp:"小先知書", ch:14, author:"何西阿", era:"約主前750年", theme:"上帝不離不棄的愛", key:"我必聘你永遠歸我為妻。",
+   summary:"以先知破碎的婚姻喻示上帝對背道以色列那不離不棄、充滿忍耐的愛。"},
+  {id:29, name:"約珥書", en:"Joel", grp:"小先知書", ch:3, author:"約珥", era:"約主前835年", theme:"耶和華的日子", key:"凡求告耶和華名的就必得救。",
+   summary:"以蝗災預示耶和華的日子，呼籲悔改，並預言聖靈澆灌與末世的拯救。"},
+  {id:30, name:"阿摩司書", en:"Amos", grp:"小先知書", ch:9, author:"阿摩司", era:"約主前760年", theme:"公義與審判", key:"惟願公平如大水滾滾，公義如江河滔滔。",
+   summary:"先知阿摩司大膽譴責社會不公與虛假的宗教，呼籲追求公義與公平。"},
+  {id:31, name:"俄巴底亞書", en:"Obadiah", grp:"小先知書", ch:1, author:"俄巴底亞", era:"約主前586年", theme:"以東的驕傲與敗亡", key:"你狂傲的心欺哄了你。",
+   summary:"全書最短，宣告上帝對驕傲的以東的審判，並應許以色列的復興。"},
+  {id:32, name:"約拿書", en:"Jonah", grp:"小先知書", ch:4, author:"約拿", era:"約主前780年", theme:"上帝的憐憫與萬民", key:"這許多人豈能不分別好歹？我豈能不愛惜呢？",
+   summary:"先知約拿不願向尼尼微傳道，卻經歷上帝的大愛與寬廣憐憫，學習順服。"},
+  {id:33, name:"彌迦書", en:"Micah", grp:"小先知書", ch:7, author:"彌迦", era:"約主前735年", theme:"行公義好憐憫", key:"世人哪，耶和華已指示你何為善。",
+   summary:"先知彌迦呼籲行公義、好憐憫、存謙卑的心與上帝同行，並預言彌賽亞的出生地伯利恆。"},
+  {id:34, name:"那鴻書", en:"Nahum", grp:"小先知書", ch:3, author:"那鴻", era:"約主前650年", theme:"尼尼微的傾覆", key:"耶和華本為善，在患難的日子為人的保障。",
+   summary:"宣告上帝對邪惡強權尼尼微的審判，顯明上帝是患難中的保障與公義的上帝。"},
+  {id:35, name:"哈巴谷書", en:"Habakkuk", grp:"小先知書", ch:3, author:"哈巴谷", era:"約主前605年", theme:"義人因信得生", key:"義人必因信得生。",
+   summary:"先知向上帝質問惡人猖獗，最終學習在苦難中因信靠上帝而歡喜，明白「義人因信得生」。 "},
+  {id:36, name:"西番雅書", en:"Zephaniah", grp:"小先知書", ch:3, author:"西番雅", era:"約主前630年", theme:"耶和華的日子與餘民", key:"耶和華你的上帝是施行拯救、大有能力的主。",
+   summary:"宣告耶和華大日的審判，也應許謙卑的餘民將蒙上帝拯救並歡喜歌唱。"},
+  {id:37, name:"哈該書", en:"Haggai", grp:"小先知書", ch:2, author:"哈該", era:"約主前520年", theme:"重建聖殿", key:"這殿後來的榮耀必大過先前的榮耀。",
+   summary:"先知哈該催促歸回的百姓重建聖殿，應許後來的榮耀將勝於先前。"},
+  {id:38, name:"撒迦利亞書", en:"Zechariah", grp:"小先知書", ch:14, author:"撒迦利亞", era:"約主前520–480年", theme:"彌賽亞與末世的盼望", key:"不是倚靠勢力，不是倚靠才能，乃是倚靠我的靈。",
+   summary:"先知撒迦利亞以八個異象與預言激勵百姓重建聖殿，預言彌賽亞君王與末世的榮耀。"},
+  {id:39, name:"瑪拉基書", en:"Malachi", grp:"小先知書", ch:4, author:"瑪拉基", era:"約主前430年", theme:"回歸與彌賽亞的前驅", key:"萬軍之耶和華說：你們要將當納的十分之一全然送入倉庫。",
+   summary:"最後一卷舊約先知書，斥責以色列的虛假敬拜，預言施洗約翰與彌賽亞的來臨。"}
+];
+
+const NT = [
+  {id:40, name:"馬太福音", en:"Matthew", grp:"福音書", ch:28, author:"馬太", era:"約主後60年", theme:"耶穌是君王彌賽亞", key:"你們要先求他的國和他的義。",
+   summary:"以君王彌賽亞的視角記述耶穌的生平、教訓與登山寶訓，並以大使命作結。"},
+  {id:41, name:"馬可福音", en:"Mark", grp:"福音書", ch:16, author:"馬可", era:"約主後60年", theme:"耶穌是受苦的僕人", key:"因為人子來，並不是要受人的服事，乃是要服事人。",
+   summary:"最簡潔的福音書，聚焦耶穌的行動與僕人事奉，強調為人捨命的救贖。"},
+  {id:42, name:"路加福音", en:"Luke", grp:"福音書", ch:24, author:"路加", era:"約主後60年", theme:"耶穌是人的救主", key:"人子來，為要尋找、拯救失喪的人。",
+   summary:"醫生路加以詳盡筆觸記述耶穌的降生、比喻與慈愛，特別關注被社會輕看的人。"},
+  {id:43, name:"約翰福音", en:"John", grp:"福音書", ch:21, author:"約翰", era:"約主後85年", theme:"耶穌是上帝的兒子", key:"上帝愛世人，甚至將他的獨生子賜給他們。",
+   summary:"以「我是」七個宣告揭示耶穌的神性，記述七個神蹟，領人相信耶穌是基督、是上帝的兒子。"},
+  {id:44, name:"使徒行傳", en:"Acts", grp:"教會歷史", ch:28, author:"路加", era:"約主後62年", theme:"聖靈與教會的擴展", key:"但聖靈降臨在你們身上，你們就必得著能力。",
+   summary:"記述早期教會在聖靈引導下，從耶路撒冷、猶太全地擴展到羅馬的宣教歷史。"},
+  {id:45, name:"羅馬書", en:"Romans", grp:"保羅書信", ch:16, author:"保羅", era:"約主後57年", theme:"因信稱義的福音", key:"因為世人都犯了罪，虧缺了上帝的榮耀。",
+   summary:"保羅系統論述因信稱義、成聖與得榮耀的救恩真理，是福音神學的根基。"},
+  {id:46, name:"哥林多前書", en:"1 Corinthians", grp:"保羅書信", ch:16, author:"保羅", era:"約主後55年", theme:"教會合一與屬靈恩賜", key:"如今常存的有信、有望、有愛這三樣，其中最大的是愛。",
+   summary:"保羅處理哥林多教會分爭、淫亂等問題，並論愛的真諦與復活盼望。"},
+  {id:47, name:"哥林多後書", en:"2 Corinthians", grp:"保羅書信", ch:13, author:"保羅", era:"約主後56年", theme:"僕人的軟弱與上帝的能力", key:"我的恩典夠你用的，因為我的能力是在人的軟弱上顯得完全。",
+   summary:"保羅為使徒職分辯護，分享在患難中靠上帝恩典的秘訣與事奉的榮光。"},
+  {id:48, name:"加拉太書", en:"Galatians", grp:"保羅書信", ch:6, author:"保羅", era:"約主後49年", theme:"基督裡的自由", key:"基督釋放了我們，叫我們得以自由。",
+   summary:"保羅激烈辯護因信稱義的福音，駁斥靠律法稱義，宣告基督裡的真正自由。"},
+  {id:49, name:"以弗所書", en:"Ephesians", grp:"保羅書信", ch:6, author:"保羅", era:"約主後60年", theme:"教會是基督的身體", key:"你們得救是本乎恩，也因著信。",
+   summary:"論述上帝在基督裡的救恩、教會合一的奧祕，以及基督徒屬靈爭戰的全副軍裝。"},
+  {id:50, name:"腓立比書", en:"Philippians", grp:"保羅書信", ch:4, author:"保羅", era:"約主後61年", theme:"喜樂與謙卑", key:"我靠著那加給我力量的，凡事都能做。",
+   summary:"保羅在獄中寫的喜樂書信，教導謙卑、合一與靠主喜樂的秘訣。"},
+  {id:51, name:"歌羅西書", en:"Colossians", grp:"保羅書信", ch:4, author:"保羅", era:"約主後60年", theme:"基督的超越", key:"所積蓄的一切智慧知識，都在他裡面藏著。",
+   summary:"保羅高舉基督的超越性與豐盛，駁斥異端，呼籲過以基督為首的生活。"},
+  {id:52, name:"帖撒羅尼迦前書", en:"1 Thessalonians", grp:"保羅書信", ch:5, author:"保羅", era:"約主後51年", theme:"聖潔與主的再來", key:"凡事謝恩，因為這是上帝在基督耶穌裡向你們所定的旨意。",
+   summary:"保羅勉勵初信者過聖潔、勞作與相愛的生活，並以主再來的盼望安慰眾人。"},
+  {id:53, name:"帖撒羅尼迦後書", en:"2 Thessalonians", grp:"保羅書信", ch:3, author:"保羅", era:"約主後51年", theme:"主再來的預備", key:"弟兄們，你們行善不可喪志。",
+   summary:"澄清主再來的真理，警告不法之人，勉勵信徒殷勤做工、堅守真道。"},
+  {id:54, name:"提摩太前書", en:"1 Timothy", grp:"保羅書信", ch:6, author:"保羅", era:"約主後62年", theme:"教會治理與敬虔", key:"敬虔加上知足的心便是大利了。",
+   summary:"保羅指導提摩太治理教會，論監督與執事的資格，以及敬虔生活的操練。"},
+  {id:55, name:"提摩太後書", en:"2 Timothy", grp:"保羅書信", ch:4, author:"保羅", era:"約主後67年", theme:"忠心到底的使命", key:"那美好的仗我已經打過了，當跑的路我已經跑盡了。",
+   summary:"保羅的遺囑之作，勉勵提摩太剛強忠心、傳揚真道、持守託付直到見主。"},
+  {id:56, name:"提多書", en:"Titus", grp:"保羅書信", ch:3, author:"保羅", era:"約主後63年", theme:"善行與教會秩序", key:"他救了我們，並不是因我們自己所行的義。",
+   summary:"保羅指示提多在克里特設立教會秩序，勉勵信徒在各樣善事上顯出美好見證。"},
+  {id:57, name:"腓利門書", en:"Philemon", grp:"保羅書信", ch:1, author:"保羅", era:"約主後60年", theme:"寬恕與接納", key:"你若以我為同伴，就收納他如同收納我一樣。",
+   summary:"保羅為逃奴阿尼西母求情，呼籲主人腓利門在愛中寬恕並接納他如同弟兄。"},
+  {id:58, name:"希伯來書", en:"Hebrews", grp:"普通書信", ch:13, author:"不詳", era:"約主後64年", theme:"基督的超越與信心", key:"信就是所望之事的實底，是未見之事的確據。",
+   summary:"論證基督超越天使、摩西與舊約祭司，勸勉信徒持守信心、奔那擺在前頭的路程。"},
+  {id:59, name:"雅各書", en:"James", grp:"普通書信", ch:5, author:"雅各", era:"約主後49年", theme:"行道與活潑的信心", key:"信心沒有行為也是死的。",
+   summary:"強調真實信心必須以行為顯明，教導言語、待人與禱告的實用智慧。"},
+  {id:60, name:"彼得前書", en:"1 Peter", grp:"普通書信", ch:5, author:"彼得", era:"約主後64年", theme:"受苦中的盼望", key:"叫你們的信心既被試驗，就比那被火試驗仍然能壞的金子更顯寶貴。",
+   summary:"彼得安慰在苦難中的信徒，勉勵他們以活潑盼望、聖潔生活與牧養心志面對試煉。"},
+  {id:61, name:"彼得後書", en:"2 Peter", grp:"普通書信", ch:3, author:"彼得", era:"約主後66年", theme:"真道與主的再來", key:"主所應許的尚未成就，他乃是寬容你們。",
+   summary:"彼得警告異端假教師，勉勵信徒在恩典與知識上長進，等候主再來的新天新地。"},
+  {id:62, name:"約翰一書", en:"1 John", grp:"普通書信", ch:5, author:"約翰", era:"約主後90年", theme:"愛與光中相交", key:"上帝就是愛；住在愛裡面的，就是住在上帝裡面。",
+   summary:"約翰勉勵信徒在光明中行、彼此相愛，並持守對上帝兒子的真信仰。"},
+  {id:63, name:"約翰二書", en:"2 John", grp:"普通書信", ch:1, author:"約翰", era:"約主後90年", theme:"愛與真理", key:"愛你們是為真理的緣故，這真理存在我們裡面。",
+   summary:"約翰簡短警告拒絕異端，勉勵信徒在愛與真理中彼此接待。"},
+  {id:64, name:"約翰三書", en:"3 John", grp:"普通書信", ch:1, author:"約翰", era:"約主後90年", theme:"接待與忠心", key:"親愛的兄弟啊，你不要效法惡，只要效法善。",
+   summary:"約翰稱讚該猶的忠心接待，斥責丟特腓的專權，勉勵行善。"},
+  {id:65, name:"猶大書", en:"Jude", grp:"普通書信", ch:1, author:"猶大", era:"約主後65年", theme:"為真道爭辯", key:"要在至聖的真道上造就自己，在聖靈裡禱告。",
+   summary:"猶大警告異端入侵，呼籲信徒為一次交付的真道竭力爭辯並堅守信心。"},
+  {id:66, name:"啟示錄", en:"Revelation", grp:"啟示書", ch:22, author:"約翰", era:"約主後95年", theme:"末世的得勝與新天新地", key:"看哪，上帝的帳幕在人間。他要與人同住。",
+   summary:"約翰在拔摩海島領受末世啟示，記述七教會、災難審判與新天新地的終極盼望。"}
+];
+
+const ALL_BOOKS = [...OT, ...NT];
+const BOOK_GROUPS = ["摩西五經","歷史書","詩歌智慧書","大先知書","小先知書","福音書","教會歷史","保羅書信","普通書信","啟示書"];
+
+/* 精選經文庫 */
+const VERSES = [
+  {book:"創世記", ref:"1:1", text:"起初，上帝創造天地。"},
+  {book:"創世記", ref:"1:27", text:"上帝就照著自己的形像造人，乃是照著他的形像造男造女。"},
+  {book:"出埃及記", ref:"20:3", text:"除了我以外，你不可有別的神。"},
+  {book:"申命記", ref:"6:5", text:"你要盡心、盡性、盡力愛耶和華你的上帝。"},
+  {book:"約書亞記", ref:"24:15", text:"至於我和我家，我們必定事奉耶和華。"},
+  {book:"路得記", ref:"1:16", text:"你無論往哪裡去，我也往那裡去。"},
+  {book:"詩篇", ref:"23:1", text:"耶和華是我的牧者，我必不致缺乏。"},
+  {book:"詩篇", ref:"23:4", text:"我雖然行過死蔭的幽谷，也不怕遭害，因為你與我同在。"},
+  {book:"詩篇", ref:"46:1", text:"上帝是我們的避難所，是我們的力量，是我們在患難中隨時的幫助。"},
+  {book:"詩篇", ref:"119:105", text:"你的話是我腳前的燈，是我路上的光。"},
+  {book:"箴言", ref:"3:5", text:"你要專心仰賴耶和華，不可倚靠自己的聰明。"},
+  {book:"箴言", ref:"3:6", text:"在你一切所行的事上都要認定他，他必指引你的路。"},
+  {book:"箴言", ref:"9:10", text:"敬畏耶和華是智慧的開端。"},
+  {book:"傳道書", ref:"3:1", text:"凡事都有定期，天下萬務都有定時。"},
+  {book:"以賽亞書", ref:"40:31", text:"但那等候耶和華的必重新得力。他們必如鷹展翅上騰。"},
+  {book:"以賽亞書", ref:"41:10", text:"你不要害怕，因為我與你同在；不要驚惶，因為我是你的上帝。"},
+  {book:"以賽亞書", ref:"53:5", text:"他為我們的過犯受害，為我們的罪孽壓傷。因他受的刑罰，我們得平安。"},
+  {book:"耶利米書", ref:"29:11", text:"我知道我向你們所懷的意念是賜平安的意念，不是降災禍的意念。"},
+  {book:"耶利米哀歌", ref:"3:22", text:"我們不至消滅，是出於耶和華諸般的慈愛，因他的憐憫不致斷絕。"},
+  {book:"以西結書", ref:"36:26", text:"我也要賜給你們一個新心，將新靈放在你們裡面。"},
+  {book:"但以理書", ref:"12:3", text:"智慧人必發光，如同天上的光。"},
+  {book:"彌迦書", ref:"6:8", text:"世人哪，耶和華已指示你何為善。他向你所要的是甚麼呢？只要你行公義、好憐憫、存謙卑的心與你的上帝同行。"},
+  {book:"哈巴谷書", ref:"2:4", text:"惟義人因信得生。"},
+  {book:"瑪拉基書", ref:"3:10", text:"萬軍之耶和華說：你們要將當納的十分之一全然送入倉庫。"},
+  {book:"馬太福音", ref:"5:9", text:"使人和睦的人有福了，因為他們必稱為上帝的兒子。"},
+  {book:"馬太福音", ref:"6:33", text:"你們要先求他的國和他的義，這些東西都要加給你們了。"},
+  {book:"馬太福音", ref:"11:28", text:"凡勞苦擔重擔的人可以到我這裡來，我就使你們得安息。"},
+  {book:"馬太福音", ref:"22:37", text:"你要盡心、盡性、盡意愛主你的上帝。"},
+  {book:"馬可福音", ref:"10:45", text:"因為人子來，並不是要受人的服事，乃是要服事人，並且要捨命作多人的贖價。"},
+  {book:"路加福音", ref:"6:31", text:"你們願意人怎樣待你們，你們也要怎樣待人。"},
+  {book:"約翰福音", ref:"3:16", text:"上帝愛世人，甚至將他的獨生子賜給他們，叫一切信他的，不致滅亡，反得永生。"},
+  {book:"約翰福音", ref:"8:12", text:"我是世界的光。跟從我的，就不在黑暗裡走。"},
+  {book:"約翰福音", ref:"14:6", text:"我就是道路、真理、生命；若不藉著我，沒有人能到父那裡去。"},
+  {book:"約翰福音", ref:"15:5", text:"我是葡萄樹，你們是枝子。常在我裡面的，我也常在他裡面。"},
+  {book:"羅馬書", ref:"3:23", text:"因為世人都犯了罪，虧缺了上帝的榮耀。"},
+  {book:"羅馬書", ref:"5:8", text:"惟有基督在我們還作罪人的時候為我們死，上帝的愛就在此向我們顯明了。"},
+  {book:"羅馬書", ref:"8:28", text:"我們曉得萬事都互相效力，叫愛上帝的人得益處。"},
+  {book:"羅馬書", ref:"12:2", text:"不要效法這個世界，只要心意更新而變化。"},
+  {book:"哥林多前書", ref:"13:4", text:"愛是恆久忍耐，又有恩慈；愛是不嫉妒，愛是不自誇，不張狂。"},
+  {book:"哥林多前書", ref:"13:13", text:"如今常存的有信、有望、有愛這三樣，其中最大的是愛。"},
+  {book:"哥林多後書", ref:"5:17", text:"若有人在基督裡，他就是新造的人，舊事已過，都變成新的了。"},
+  {book:"加拉太書", ref:"5:22", text:"聖靈所結的果子就是仁愛、喜樂、和平、忍耐、恩慈、良善、信實。"},
+  {book:"以弗所書", ref:"2:8", text:"你們得救是本乎恩，也因著信；這並不是出於自己，乃是上帝所賜的。"},
+  {book:"腓立比書", ref:"4:4", text:"你們要靠主常常喜樂。我再說，你們要喜樂。"},
+  {book:"腓立比書", ref:"4:6", text:"應當一無掛慮，只要凡事藉著禱告、祈求，和感謝，將你們所要的告訴上帝。"},
+  {book:"腓立比書", ref:"4:13", text:"我靠著那加給我力量的，凡事都能做。"},
+  {book:"歌羅西書", ref:"3:23", text:"無論做甚麼，都要從心裡做，像是給主做的。"},
+  {book:"帖撒羅尼迦前書", ref:"5:16", text:"要常常喜樂，不住地禱告，凡事謝恩。"},
+  {book:"提摩太後書", ref:"3:16", text:"聖經都是上帝所默示的，於教訓、督責、使人歸正、教導人學義都是有益的。"},
+  {book:"希伯來書", ref:"11:1", text:"信就是所望之事的實底，是未見之事的確據。"},
+  {book:"希伯來書", ref:"11:6", text:"人非有信，就不能得上帝的喜悅。"},
+  {book:"雅各書", ref:"1:5", text:"你們中間若有缺少智慧的，應當求那厚賜與眾人、也不斥責人的上帝，主就必賜給他。"},
+  {book:"彼得前書", ref:"5:7", text:"你們要將一切的憂慮卸給上帝，因為他顧念你們。"},
+  {book:"約翰一書", ref:"4:8", text:"沒有愛心的，就不認識上帝，因為上帝就是愛。"},
+  {book:"約翰一書", ref:"4:19", text:"我們愛，因為上帝先愛我們。"},
+  {book:"啟示錄", ref:"21:4", text:"上帝要擦去他們一切的眼淚；不再有死亡，也不再有悲哀、哭號、疼痛。"}
+];
+
+/* 功能文章 */
+const ARTICLES = [
+  {id:"a1", cat:"讀經方法", title:"如何一年讀完整本聖經？實用讀經計畫", excerpt:"提供一套可執行的全年讀經計畫與每日進度分配，幫助你系統性讀完 66 卷聖經。",
+   body:["讀完整本聖經是許多信徒的目標，但 66 卷、1,189 章、約 31,102 節的篇幅常讓人卻步。關鍵在於建立可行的計畫與節奏。",
+     "<strong>全年讀經的四種策略</strong>：",
+     "1. 按卷順序讀：從創世記依序讀到啟示錄，最貼近聖經的時間與敘事脈絡。",
+     "2. 歷史進程讀：將詩歌智慧書穿插在歷史脈絡中閱讀，例如在撒母耳記後接讀詩篇，更能貼近作者心境。",
+     "3. 新舊約並進：每日同時讀一段舊約與一段新約，維持新約的屬靈溫度。",
+     "4. 主題式讀經：按主題（如信心、愛、盼望）彙整相關經文研讀。",
+     "<strong>每日進度參考</strong>：平均每日約 3–4 章，配合週末彈性補進度。建議固定一個時段（如晨間 20 分鐘）形成習慣。",
+     "讀經不只是讀完，更要<em>讀懂</em>。善用章節導覽、經文搜尋與註釋工具，在讀的同時理解歷史背景與神學重點，收穫遠超過瀏覽文字本身。"]},
+  {id:"a2", cat:"靈修默想", title:"默想經文的三個步驟：讓聖經進入生活", excerpt:"不只是讀，而是讓經文沉澱心靈、改變生命。分享實用的默想三步驟。",
+   body:["默想（Meditation）在希伯來傳統中如同「反芻」，是讓上帝的話語反覆咀嚼、深入心靈的過程。詩篇 1:2 形容喜愛耶和華律法者「晝夜思想」，這是蒙福的關鍵。",
+     "<strong>步驟一：專注讀誦</strong>。選一段短經文，放慢速度讀三遍，留意關鍵字詞與語氣的轉折。",
+     "<strong>步驟二：反覆思想</strong>。自問三個問題：這段話告訴我上帝是誰？這段話如何關照我的處境？我當如何回應？",
+     "<strong>步驟三：內化應用</strong>。將感動化為一句禱告，並設定今天一個具體的行動，讓經文真正「活」在生活裡。",
+     "默想的場域可以是晨間、通勤、睡前，重點是品質而非時長。持之以恆，你會發現上帝的話語成為腳前的燈、路上的光。"]},
+  {id:"a3", cat:"聖經主題", title:"聖經中「愛」的完整面貌", excerpt:"從舊約的hesed到新約的agape，爬梳聖經如何定義愛，以及愛在生活中的實踐。",
+   body:["「愛」是聖經的核心主題。希伯來文常用 hesed（忠誠之愛／慈愛）與 ahab（情感之愛），希臘文則有 phileo（友愛）、eros（情愛）與 agape（犧牲之愛）。",
+     "<strong>舊約的愛</strong>：上帝的愛是主動、立約、忠誠的。申命記 6:5 呼籲人「盡心、盡性、盡力愛上帝」，而愛鄰舍與愛寄居的，正是這份愛的具體延伸。",
+     "<strong>新約的愛</strong>：耶穌以捨己示範 agape——愛是捨己、服事、甚至愛仇敵。哥林多前書 13 章被譽為「愛的頌歌」，描繪愛的本質：恆久忍耐、有恩慈、不自誇。",
+     "約翰一書 4:8 給出最深的定義：<span class='verse-q'>「上帝就是愛」</span>。愛不是抽象概念，而是上帝的本性；因祂先愛我們，我們才得以愛祂與愛人。",
+     "操練愛的第一步，是從身邊最難愛的人開始，以實際的饒恕、傾聽與服事，讓上帝的愛透過我們流露出去。"]},
+  {id:"a4", cat:"聖經背景", title:"聖經的歷史脈絡：從亞伯拉罕到使徒時代", excerpt:"以時間軸理解聖經六大時代，掌握救贖歷史的宏觀脈絡。",
+   body:["要讀懂聖經，先建立宏觀的歷史座標。聖經涵蓋逾兩千年，可大致劃分為六個時代：",
+     "1. <strong>族長時代</strong>：從亞伯拉罕蒙召（約主前 2000 年）到以色列下埃及，上帝揀選一族成為萬民祝福。",
+     "2. <strong>出埃及與曠野</strong>：摩西領民出埃及、頒布律法、曠野飄流四十年。",
+     "3. <strong>士師與王國</strong>：進入迦南、士師治理，至掃羅、大衛、所羅門的聯合王國，後分裂為南北兩國。",
+     "4. <strong>被擄與歸回</strong>：北國被亞述滅、南國被巴比倫滅，波斯時期歸回重建聖殿。",
+     "5. <strong>兩約之間</strong>：約 400 年的沉默期，希臘與羅馬勢力興起。",
+     "6. <strong>新約時代</strong>：耶穌降生、受死復活，福音從耶路撒冷擴及羅馬全境。",
+     "掌握這條主軸，每卷書便能放回它的歷史位置，上帝救贖計畫的宏大與一致也將清晰呈現。"]},
+  {id:"a5", cat:"靈修默想", title:"禱告的七種樣式：向上帝敞開心的練習", excerpt:"從讚美、認罪到代求，認識聖經中不同的禱告型態，豐富你的禱告生活。",
+   body:["禱告是與上帝對話，而非單向的願望清單。聖經示範了多種禱告樣式：",
+     "<strong>1. 讚美與敬拜</strong>：如詩篇頌讚上帝的屬性與作為，先聚焦於上帝本身。",
+     "<strong>2. 感恩</strong>：數算上帝的恩典，「凡事謝恩」（帖前 5:18）。",
+     "<strong>3. 認罪</strong>：坦然承認過犯，領受赦免與潔淨（約一 1:9）。",
+     "<strong>4. 祈求</strong>：將需要帶到上帝面前，但學習順服祂的旨意。",
+     "<strong>5. 代求</strong>：為他人、教會與世界守望，如保羅為眾教會禱告。",
+     "<strong>6. 默觀</strong>：安靜等候上帝，聆聽祂溫柔的聲音。",
+     "<strong>7. 爭戰</strong>：倚靠聖靈的權能面對屬靈爭戰。",
+     "每天預留一段專屬時刻，嘗試以不同樣式禱告，讓禱告從「例行公事」成為親密而真實的關係。"]},
+  {id:"a6", cat:"聖經主題", title:"信心是什麼？聖經中 5 位信心的見證人", excerpt:"以亞伯拉罕、摩西、大衛、以斯帖與保羅的生命，看見信心在不同處境中的樣貌。",
+   body:["希伯來書 11 章被稱為「信心名人堂」，其實信心不是抽象概念，而是具體的生命行動。",
+     "<strong>亞伯拉罕——信心的父</strong>：上帝呼召他離開本家，他信上帝必成就應許，縱然前路未明（創 15:6）。",
+     "<strong>摩西——信心的捨棄</strong>：他寧可與上帝的百姓同受苦害，也不願暫時享受罪中之樂，因他「恆心忍耐，如同看見那不能看見的主」。",
+     "<strong>大衛——信心的倚靠</strong>：面對歌利亞，他宣告「耶和華必救我脫離非利士人的手」，靠的不是刀劍，而是上帝的名。",
+     "<strong>以斯帖——信心的冒險</strong>：「我若死就死吧」，她以捨己之勇進入王宮，扭轉了民族的命運。",
+     "<strong>保羅——信心的忍耐</strong>：在捆鎖與患難中，他仍宣告「我靠著那加給我力量的，凡事都能做」。",
+     "信心是「所望之事的實底，是未見之事的確據」（來 11:1）。願我們在各自的曠野與戰場上，同樣以信心的眼光回應那位信實的上帝。"]},
+  {id:"a7", cat:"讀經方法", title:"善用工具讀聖經：搜尋、導覽與註釋的實務技巧", excerpt:"現代數位工具讓讀經更有效率，教你善用章節導覽、全文搜尋與串珠註釋。",
+   body:["數位時代的讀經工具能大幅提升理解效率，本站正是為了輔助研讀而設計。",
+     "<strong>書卷導覽</strong>：認識每卷書的作者、時代、主題與大綱，先掌握全貌再進入細節，能避免見樹不見林。",
+     "<strong>全文搜尋</strong>：以關鍵字檢索經文與文章，適合主題式研究。例如搜尋「憐憫」，一次彙整散佈各卷的相關經文。",
+     "<strong>章節閱讀</strong>：按書卷章節順序閱讀，搭配前後翻頁與書籤功能，建立穩定的讀經節奏。",
+     "<strong>串珠與註釋</strong>：藉由相關經文互參（如新約引用舊約），理解聖經內在的一致與深度。",
+     "工具是僕人而非主人。讓數位工具服務於讀經的專注與默想，而非取代與上帝相遇的時刻。"]},
+  {id:"a8", cat:"靈修默想", title:"在低谷中得力：聖經給憂慮者的 6 句應許", excerpt:"當憂慮壟罩心頭，聖經的應許是穩固的錨。收錄 6 句撫慰憂慮者的經文與默想。",
+   body:["憂慮是現代人普遍的綑綁，聖經卻反覆以「不要懼怕」「不要憂慮」來安慰祂的子民。以下是 6 句深具力量的應許：",
+     "<strong>1. 祂必看顧</strong>：「你們要將一切的憂慮卸給上帝，因為他顧念你們。」（彼前 5:7）",
+     "<strong>2. 祂的同在</strong>：「你不要害怕，因為我與你同在。」（賽 41:10）",
+     "<strong>3. 祂的平安</strong>：「我留下平安給你們；我將我的平安賜給你們。」（約 14:27）",
+     "<strong>4. 祂的供應</strong>：「你們要先求他的國和他的義，這些東西都要加給你們了。」（太 6:33）",
+     "<strong>5. 祂的意念</strong>：「我知道我向你們所懷的意念是賜平安的意念。」（耶 29:11）",
+     "<strong>6. 祂的能力</strong>：「我的恩典夠你用的，因為我的能力是在人的軟弱上顯得完全。」（林後 12:9）",
+     "憂慮常在於我們想掌控無法掌控之事。將重擔交給那位掌管萬有的上帝，並以禱告取代焦慮，是得力的起點。"]}
+];
+</script>
+
+<!-- ===== 渲染與邏輯 ===== -->
+<script>
+(function(){
+  "use strict";
+  const app = document.getElementById("app");
+  const mount = document.getElementById("viewMount");
+  const NAV = [
+    {id:"home",    label:"首頁",   icon:"M3 12l9-9 9 9"},
+    {id:"books",   label:"書卷導覽", icon:"M4 19.5A2.5 2.5 0 016.5 17H20"},
+    {id:"reader",  label:"章節閱讀", icon:"M12 5c-2-1.5-4.5-2-7-2v16c2.5 0 5 .5 7 2 2-1.5 4.5-2 7-2V3c-2.5 0-5 .5-7 2z"},
+    {id:"search",  label:"經文搜尋", icon:"M11 19a8 8 0 100-16 8 8 0 000 16z M21 21l-4.35-4.35"},
+    {id:"articles",label:"功能文章", icon:"M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z M14 2v6h6"},
+    {id:"golden",  label:"每日金句", icon:"M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"},
+    {id:"stats",   label:"統計圖表", icon:"M18 20V10M12 20V4M6 20v-6"},
+    {id:"bookmarks",label:"我的書籤", icon:"M19 21l-7-5-7 5V5a2 2 0 012-2h10a2 2 0 012 2z"}
+  ];
+
+  /* ---------- 狀態 ---------- */
+  let state = {
+    route:"home",
+    bookFilter:"全部",
+    readerBook:"詩篇",
+    readerChap:23,
+    searchQ:"",
+    bookmarks:JSON.parse(localStorage.getItem("bibleBookmarks")||"[]")
+  };
+
+  /* ---------- 工具 ---------- */
+  const $ = (id)=>document.getElementById(id);
+  function bookByName(name){return ALL_BOOKS.find(b=>b.name===name);}
+  /* 書卷中文名 → BIBLE_TEXT 資料碼 對應 */
+  const BOOK_CODE = (()=>{const m={};if(window.BIBLE_TEXT){for(const c in window.BIBLE_TEXT){m[window.BIBLE_TEXT[c].name]=c;}}return m;})();
+  function textFor(bookName,chap){ /* 回傳該章逐節陣列，失敗回 null */
+    if(!window.BIBLE_TEXT) return null;
+    const code=BOOK_CODE[bookName]; if(!code) return null;
+    const bk=window.BIBLE_TEXT[code]; if(!bk) return null;
+    const ch=bk.chapters[chap-1]; if(!ch||!ch.length) return null;
+    return {code, chapters:bk.chapters.length, verses:ch, head:bk.heads&&bk.heads[chap-1]||""};
+  }
+  function esc(s){return String(s).replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));}
+  function getBookmarks(){return state.bookmarks;}
+  function saveBookmarks(){localStorage.setItem("bibleBookmarks",JSON.stringify(state.bookmarks));}
+  function bmKey(book,chap){return book+"|"+chap;}
+
+  /* ---------- 頂欄導覽 ---------- */
+  function renderNav(){
+    const nav = $("navLinks");
+    nav.innerHTML = NAV.map(n=>{
+      return `<a href="#${n.id}" data-route="${n.id}" class="${state.route===n.id?"active":""}">
+        <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.8" style="vertical-align:-2px;margin-right:4px"><path d="${n.icon}"/></svg>${n.label}</a>`;
+    }).join("");
+    nav.querySelectorAll("a").forEach(a=>{
+      a.addEventListener("click",e=>{e.preventDefault();go(a.dataset.route);});
+    });
+  }
+
+  /* ---------- 路由 ---------- */
+  function go(route,param){
+    state.route = route;
+    if(route==="reader"){ /* 保持目前書卷章節 */ }
+    if(param && param.book){state.readerBook=param.book;}
+    if(param && param.chap){state.readerChap=param.chap;}
+    location.hash = route;
+    render();
+    window.scrollTo(0,0);
+  }
+  window.addEventListener("hashchange",()=>{
+    const h = location.hash.replace("#","")||"home";
+    state.route = h.split("/")[0];
+    if(h.indexOf("/")>-1){
+      const parts = h.split("/");
+      if(state.route==="reader" && parts[1]){state.readerBook=decodeURIComponent(parts[1]);if(parts[2])state.readerChap=+parts[2];}
+      if(state.route==="articles" && parts[1]){renderArticle(decodeURIComponent(parts[1]));return;}
+    }
+    render();
+    window.scrollTo(0,0);
+  });
+
+  /* ---------- 渲染總入口 ---------- */
+  function render(){
+    renderNav();
+    const views = {home:renderHome,books:renderBooks,reader:renderReader,search:renderSearch,articles:renderArticles,golden:renderGolden,stats:renderStats,bookmarks:renderBookmarks};
+    const fn = views[state.route]||renderHome;
+    app.innerHTML = "";
+    const el = fn();
+    app.appendChild(el);
+    if(state.route==="stats"){setTimeout(initCharts,50);}
+  }
+
+  /* ================= 首頁 ================= */
+  function renderHome(){
+    const sec = document.createElement("div");
+    sec.className="view on";
+    const totalChapters = ALL_BOOKS.reduce((s,b)=>s+b.ch,0);
+    const groups = BOOK_GROUPS.map(g=>ALL_BOOKS.filter(b=>b.grp===g).length).reduce((a,b)=>a+b,0);
+    sec.innerHTML = `
+      <section class="hero">
+        <svg class="orn" viewBox="0 0 24 24" fill="none" stroke="#f7f1e3" stroke-width="0.5"><path d="M12 5c-2-1.5-4.5-2-7-2v16c2.5 0 5 .5 7 2 2-1.5 4.5-2 7-2V3c-2.5 0-5 .5-7 2z"/><path d="M12 5v16"/></svg>
+        <div class="hero-inner">
+        <div class="kicker">上帝的話語 · 生命的糧</div>
+        <h1>聖經Bible<br>聖經知識與功能網站</h1>
+        <p class="sub">收錄舊約 39 卷、新約 27 卷共 66 卷完整書庫，提供章節閱讀、經文全文搜尋、每日金句、讀經計畫與主題文章——讓你在任何時刻，都能沉浸在上帝的話語裡。</p>
+        <div class="stats">
+          <div class="stat"><div class="num">66</div><div class="lbl">聖經書卷</div></div>
+          <div class="stat"><div class="num">${totalChapters.toLocaleString()}</div><div class="lbl">聖經章節</div></div>
+          <div class="stat"><div class="num">${VERSES.length}</div><div class="lbl">精選經文</div></div>
+          <div class="stat"><div class="num">${ARTICLES.length}</div><div class="lbl">功能文章</div></div>
+        </div>
+        <div class="hero-actions">
+          <button class="btn btn-gold" data-go="reader">開始讀聖經</button>
+          <button class="btn btn-ghost" data-go="books">瀏覽 66 卷書庫</button>
+          <button class="btn btn-ghost" data-go="golden">今日金句</button>
+        </div>
+        </div>
+      </section>
+
+      <section class="section">
+        <h2 class="sec-title"><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="var(--crimson)" stroke-width="1.8" style="vertical-align:-3px;margin-right:8px"><path d="M4 19.5A2.5 2.5 0 016.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 014 19.5v-15A2.5 2.5 0 016.5 2z"/></svg>全卷書庫總覽</h2>
+        <p class="sec-sub">舊約與新約六大書卷類別，快速前往研讀。</p>
+        <div class="grid g4" id="homeGroups"></div>
+      </section>
+
+      <section class="section">
+        <h2 class="sec-title">今日精選經文</h2>
+        <p class="sec-sub">每天一句，讓上帝的話語成為你腳前的燈。</p>
+        <div id="homeVerse" class="verse-block"></div>
+      </section>
+
+      <section class="section">
+        <h2 class="sec-title">精選功能文章</h2>
+        <p class="sec-sub">讀經方法、靈修默想與聖經主題，深化你的研讀。</p>
+        <div class="grid g3" id="homeArticles"></div>
+      </section>`;
+
+    /* 全卷書庫總覽 - 依類別統計 */
+    const gh = sec.querySelector("#homeGroups");
+    gh.innerHTML = BOOK_GROUPS.map(g=>{
+      const bs = ALL_BOOKS.filter(b=>b.grp===g);
+      return `<div class="card" data-gotobooks="${g}">
+        <div class="bnum">${g}</div>
+        <h3>${bs.length} 卷</h3>
+        <p>${bs.map(b=>b.name).join("、")}</p>
+      </div>`;
+    }).join("");
+    gh.querySelectorAll("[data-gotobooks]").forEach(c=>{
+      c.addEventListener("click",()=>{state.bookFilter=c.dataset.gotobooks;go("books");});
+    });
+
+    /* 今日經文 */
+    const v = VERSES[Math.floor(Math.random()*VERSES.length)];
+    sec.querySelector("#homeVerse").innerHTML = `
+      <div class="ref">${esc(v.book)} ${esc(v.ref)}</div>
+      <div class="txt">「${esc(v.text)}」</div>`;
+
+    /* 精選文章 */
+    const ha = sec.querySelector("#homeArticles");
+    ha.innerHTML = ARTICLES.slice(0,3).map(a=>`
+      <div class="card" data-article="${a.id}">
+        <span class="tag gold">${a.cat}</span>
+        <h3>${esc(a.title)}</h3>
+        <p>${esc(a.excerpt)}</p>
+      </div>`).join("");
+    ha.querySelectorAll("[data-article]").forEach(c=>{
+      c.addEventListener("click",()=>renderArticle(c.dataset.article));
+    });
+
+    /* 通用按鈕 */
+    sec.querySelectorAll("[data-go]").forEach(b=>b.addEventListener("click",()=>go(b.dataset.go)));
+
+    return sec;
+  }
+
+  /* ================= 書卷導覽 ================= */
+  function renderBooks(){
+    const sec = document.createElement("div");
+    sec.className="view on";
+    sec.innerHTML = `
+      <h2 class="sec-title">聖經 66 卷書庫</h2>
+      <p class="sec-sub">依類別瀏覽全卷聖經，點擊書卷查看導讀並進入章節閱讀。</p>
+      <div class="book-filter" id="bf"></div>
+      <div id="bookList"></div>`;
+
+    const bf = sec.querySelector("#bf");
+    bf.innerHTML = ["全部","舊約全書","新約全書",...BOOK_GROUPS].map(g=>{
+      return `<button data-f="${g}" class="${state.bookFilter===g?"active":""}">${g}</button>`;
+    }).join("");
+    bf.querySelectorAll("button").forEach(b=>{
+      b.addEventListener("click",()=>{state.bookFilter=b.dataset.f;renderBooks();renderNav();});
+    });
+
+    const bl = sec.querySelector("#bookList");
+    let books = ALL_BOOKS;
+    if(state.bookFilter==="舊約全書") books=OT;
+    else if(state.bookFilter==="新約全書") books=NT;
+    else if(state.bookFilter!=="全部") books=ALL_BOOKS.filter(b=>b.grp===state.bookFilter);
+
+    // 依群組分組渲染
+    const grouped = {};
+    books.forEach(b=>{(grouped[b.grp]=grouped[b.grp]||[]).push(b);});
+    let html = "";
+    Object.keys(grouped).forEach(g=>{
+      html += `<div class="book-group-title">${g}</div><div class="grid g4" style="margin-bottom:26px">`;
+      html += grouped[g].map(b=>`
+        <div class="card book-card" data-book="${b.name}">
+          <div class="bnum">第 ${b.id} 卷 · ${b.ch} 章</div>
+          <h3>${b.name}</h3>
+          <div class="meta">${b.en}</div>
+        </div>`).join("");
+      html += `</div>`;
+    });
+    bl.innerHTML = html || `<div class="empty">無符合的書卷</div>`;
+    bl.querySelectorAll("[data-book]").forEach(c=>c.addEventListener("click",()=>{
+      const b = bookByName(c.dataset.book);
+      showBookDetail(b);
+    }));
+    return sec;
+  }
+
+  /* 書卷詳情浮層 */
+  function showBookDetail(b){
+    const overlay = document.createElement("div");
+    overlay.className="book-overlay";
+    Object.assign(overlay.style,{position:"fixed",inset:0,background:"rgba(20,27,44,.55)",zIndex:100,display:"flex",alignItems:"center",justifyContent:"center",padding:"20px"});
+    overlay.innerHTML = `
+      <div class="book-modal" style="background:var(--card);border-radius:20px;max-width:640px;width:100%;max-height:88vh;overflow:auto;padding:34px 38px;border:1px solid var(--line);box-shadow:var(--shadow)">
+        <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:16px">
+          <div>
+            <div class="bnum" style="color:var(--gold);font-weight:700;letter-spacing:.08em">第 ${b.id} 卷 · ${b.grp} · ${b.ch} 章</div>
+            <h2 style="font-size:1.8rem;color:var(--navy)">${b.name} <span style="font-size:1rem;color:var(--ink-soft)">${b.en}</span></h2>
+          </div>
+          <button id="bmClose" style="background:none;border:none;font-size:1.6rem;color:var(--ink-soft);cursor:pointer;line-height:1">×</button>
+        </div>
+        <p><strong style="color:var(--navy)">作者：</strong>${b.author} ｜ <strong style="color:var(--navy)">年代：</strong>${b.era}</p>
+        <p style="margin:10px 0"><strong style="color:var(--navy)">主題：</strong>${b.theme}</p>
+        <div class="verse-block" style="margin-top:16px"><div class="ref">代表經文</div><div class="txt">「${esc(b.key)}」</div></div>
+        <p style="margin-top:16px;color:var(--ink-soft)">${b.summary}</p>
+        <div style="display:flex;gap:10px;margin-top:24px;flex-wrap:wrap">
+          <button class="btn btn-navy" data-read="${b.name}" style="margin:0">開始閱讀本書</button>
+          <button class="btn btn-line" id="bmBookmark" style="margin:0">＋ 加入書籤</button>
+        </div>
+      </div>`;
+    document.body.appendChild(overlay);
+    const close=()=>overlay.remove();
+    overlay.addEventListener("click",e=>{if(e.target===overlay)close();});
+    overlay.querySelector("#bmClose").addEventListener("click",close);
+    overlay.querySelector("[data-read]").addEventListener("click",()=>{close();go("reader",{book:b.name,chap:1});});
+    overlay.querySelector("#bmBookmark").addEventListener("click",()=>{
+      const k=bmKey(b.name,1);
+      if(!getBookmarks().some(x=>x.key===k)){getBookmarks().push({key:k,book:b.name,chap:1,ts:Date.now()});saveBookmarks();}
+      close();renderBookmarks();
+    });
+  }
+
+  /* ================= 章節閱讀 ================= */
+  function renderReader(){
+    const sec = document.createElement("div");
+    sec.className="view on";
+    const book = bookByName(state.readerBook)||ALL_BOOKS[0];
+    sec.innerHTML = `
+      <h2 class="sec-title">章節閱讀器</h2>
+      <p class="sec-sub">選擇書卷與章節，沉浸式閱讀上帝的話語。</p>
+      <div class="reader-picker">
+        <div class="picker">
+          <label>選擇書卷</label>
+          <select id="rpBook"></select>
+        </div>
+        <div class="picker">
+          <label>選擇章節</label>
+          <select id="rpChap"></select>
+        </div>
+        <button class="btn btn-gold" id="rpGo" style="margin-top:22px">讀這一章</button>
+      </div>
+      <div class="reader" id="readerBox"></div>`;
+
+    const bookSel = sec.querySelector("#rpBook");
+    ALL_BOOKS.forEach(b=>{
+      const o=document.createElement("option");o.value=b.name;o.textContent=`${b.name}（${b.ch}章）`;bookSel.appendChild(o);
+    });
+    bookSel.value = book.name;
+    const chapSel = sec.querySelector("#rpChap");
+    const fillChap=(bn)=>{
+      chapSel.innerHTML="";
+      const nb=bookByName(bn);for(let i=1;i<=nb.ch;i++){const o=document.createElement("option");o.value=i;o.textContent=`第 ${i} 章`;chapSel.appendChild(o);}
+      chapSel.value=Math.min(state.readerChap||1,nb.ch);
+    };
+    fillChap(book.name);
+    bookSel.addEventListener("change",()=>fillChap(bookSel.value));
+    sec.querySelector("#rpGo").addEventListener("click",()=>{
+      state.readerBook=bookSel.value;state.readerChap=+chapSel.value;
+      drawReader(sec.querySelector("#readerBox"));
+    });
+    drawReader(sec.querySelector("#readerBox"));
+    return sec;
+  }
+
+  /* 繪製讀經內容 */
+  function drawReader(box){
+    const b = bookByName(state.readerBook);
+    if(!b){box.innerHTML="";return;}
+    const chap = state.readerChap;
+    const key="key" in b && chap===1 ? b.key : null;
+    const isBm = getBookmarks().some(x=>x.key===bmKey(b.name,chap));
+    box.innerHTML = `
+      <div class="rhead">
+        <div class="tname">${b.grp}</div>
+        <div class="ref">${b.name} 第 ${chap} 章</div>
+        <div style="font-size:.9rem;color:var(--ink-soft);margin-top:6px">作者：${b.author} · 主題：${b.theme}</div>
+      </div>
+      <div id="rVerses"></div>
+      <div class="reader-nav">
+        <button class="btn btn-line" id="rPrev">← 前一章</button>
+        <button class="bookmark-btn ${isBm?"on":""}" id="rBm">${isBm?"★ 已收藏":"☆ 收藏本章"}</button>
+        <button class="btn btn-line" id="rNext">後一章 →</button>
+      </div>`;
+
+    const vv = box.querySelector("#rVerses");
+    // 逐節完整經文（和合本繁體公有領域）
+    const txt = textFor(b.name, chap);
+    if(txt){
+      const headHtml = txt.head ? `<div class="rchaphead">${esc(txt.head)}</div>` : "";
+      vv.innerHTML = headHtml + txt.verses.map(x=>
+        `<div class="verse"><div class="vnum">${x.v}</div><div class="vtext">${esc(x.t)}</div></div>`
+      ).join("");
+    } else {
+      // 資料缺漏時的備援：顯示代表經文＋導讀（保留原模板邏輯）
+      if(chap===1 && b.key){
+        vv.innerHTML = `<div class="verse"><div class="vnum">1</div><div class="vtext">${esc(b.key)}</div></div>
+          <div style="margin-top:20px;padding:16px 20px;background:var(--parch);border-radius:12px;color:var(--ink-soft);font-size:.95rem"><strong>本章導讀：</strong>${b.summary}</div>`;
+      } else {
+        const themed = [b.key, b.theme, `這卷書（${b.name}）共有 ${b.ch} 章，作者為${b.author}，寫作年代約${b.era}。${b.summary}`];
+        vv.innerHTML = themed.map((t,i)=>`
+          <div class="verse"><div class="vnum">${i+1}</div><div class="vtext">${esc(t)}</div></div>`).join("");
+      }
+    }
+
+    box.querySelector("#rPrev").addEventListener("click",()=>{
+      if(chap>1){state.readerChap=chap-1;drawReader(box);}else{state.readerChap=b.ch;drawReader(box);}
+    });
+    box.querySelector("#rNext").addEventListener("click",()=>{
+      if(chap<b.ch){state.readerChap=chap+1;drawReader(box);}else{state.readerChap=1;drawReader(box);}
+    });
+    box.querySelector("#rBm").addEventListener("click",()=>{
+      const k=bmKey(b.name,chap);
+      const idx=getBookmarks().findIndex(x=>x.key===k);
+      if(idx>-1){getBookmarks().splice(idx,1);}
+      else{getBookmarks().push({key:k,book:b.name,chap:chap,ts:Date.now()});}
+      saveBookmarks();drawReader(box);
+    });
+  }
+
+  /* ================= 經文搜尋 ================= */
+  function renderSearch(){
+    const sec=document.createElement("div");
+    sec.className="view on";
+    sec.innerHTML=`
+      <h2 class="sec-title">經文與全文搜尋</h2>
+      <p class="sec-sub">以關鍵字搜尋精選經文、書卷與功能文章。</p>
+      <div class="search-box">
+        <input id="si" type="text" placeholder="輸入關鍵字，例如：愛、信心、平安、憐憫…" value="${esc(state.searchQ)}">
+        <button id="sb">搜尋</button>
+      </div>
+      <div id="sr"></div>`;
+    const si=sec.querySelector("#si");const sr=sec.querySelector("#sr");
+    const run=()=>{state.searchQ=si.value.trim();doSearch(state.searchQ,sr);};
+    sec.querySelector("#sb").addEventListener("click",run);
+    si.addEventListener("keydown",e=>{if(e.key==="Enter")run();});
+    if(state.searchQ){si.value=state.searchQ;run();}
+    else{doSearch("",sr);}
+    return sec;
+  }
+  function doSearch(q,container){
+    if(!q){container.innerHTML=`<div class="empty">輸入關鍵字開始搜尋。可搜尋：全庫經文、書卷名稱與功能文章。</div>`;return;}
+    const ql=q.toLowerCase();
+    const results=[];
+    // 全庫經文（bible_text.js 31,021 節完整檢索）
+    if(window.BIBLE_TEXT){
+      let bibleHit=0;
+      for(const code in window.BIBLE_TEXT){
+        const bk=window.BIBLE_TEXT[code];
+        (bk.chapters||[]).forEach((ch,ci)=>{
+          if(!ch) return;
+          ch.forEach(v=>{
+            if(v.t && v.t.toLowerCase().includes(ql)){
+              if(bibleHit<80){
+                const bname=bk.name;
+                results.push({type:"全庫經文",t:`${bname} ${ci+1}:${v.v}`,s:v.t,go:()=>go("reader",{book:bname,chap:ci+1})});
+              }
+              bibleHit++;
+            }
+          });
+        });
+      }
+    }
+    // 精選經文
+    VERSES.forEach(v=>{
+      if((v.book+v.ref+v.text).toLowerCase().includes(ql)){
+        results.push({type:"精選經文",t:`${v.book} ${v.ref}`,s:v.text,go:()=>go("golden")});
+      }
+    });
+    // 書卷
+    ALL_BOOKS.forEach(b=>{
+      if((b.name+b.en+b.theme+b.summary).toLowerCase().includes(ql)){
+        results.push({type:"書卷",t:b.name,s:`${b.grp} · ${b.ch}章 · ${b.theme}`,go:()=>showBookDetail(b)});
+      }
+    });
+    // 文章
+    ARTICLES.forEach(a=>{
+      if((a.title+a.excerpt+a.cat+a.body.join(" ")).toLowerCase().includes(ql)){
+        results.push({type:"文章",t:a.title,s:a.excerpt,go:()=>renderArticle(a.id)});
+      }
+    });
+    if(!results.length){container.innerHTML=`<div class="empty">找不到與「${esc(q)}」相關的內容。</div>`;return;}
+    // 排序：全庫經文在前，其餘依原序
+    results.sort((a,b)=>{
+      const rank={全庫經文:0,精選經文:1,書卷:2,文章:3};
+      return (rank[a.type]??9)-(rank[b.type]??9);
+    });
+    const typeColor={全庫經文:"gold",精選經文:"navy",書卷:"navy",文章:"crimson"};
+    const totalHits = results.filter(r=>r.type==="全庫經文").length;
+    const shown = results.slice(0,60);
+    let head = `<div class="empty" style="margin-bottom:14px">找到 <strong>${totalHits}</strong> 節全庫經文${totalHits>80?"（顯示前 80 節，其餘請縮短關鍵字）":""}</div>`;
+    if(!totalHits) head="";
+    container.innerHTML = head + shown.map(r=>`
+      <div class="result-item" data-idx="${shown.indexOf(r)}">
+        <div class="rtype tag ${typeColor[r.type]}">${r.type}</div>
+        <div class="rtitle">${esc(r.t)}</div>
+        <div class="rsnip">${esc(r.s.length>80?r.s.slice(0,80)+"…":r.s)}</div>
+      </div>`).join("");
+    container.querySelectorAll(".result-item").forEach(el=>{
+      el.addEventListener("click",()=>{const idx=+el.dataset.idx;const r=shown[idx];if(r&&r.go)r.go();});
+    });
+  }
+
+  /* ================= 功能文章 ================= */
+  function renderArticles(){
+    const sec=document.createElement("div");
+    sec.className="view on";
+    const cats=["全部",...new Set(ARTICLES.map(a=>a.cat))];
+    sec.innerHTML=`
+      <h2 class="sec-title">功能文章</h2>
+      <p class="sec-sub">讀經方法、靈修默想、聖經主題與背景研究，深化你與上帝的話語的關係。</p>
+      <div class="book-filter" id="acat"></div>
+      <div class="grid g3" id="alist"></div>`;
+    const ac=sec.querySelector("#acat");
+    ac.innerHTML=cats.map(c=>`<button data-c="${c}">${c}</button>`).join("");
+    ac.querySelectorAll("button").forEach(b=>b.addEventListener("click",()=>{
+      ac.querySelectorAll("button").forEach(x=>x.classList.remove("active"));b.classList.add("active");
+      const c=b.dataset.c;
+      const list=(c==="全部"?ARTICLES:ARTICLES.filter(a=>a.cat===c));
+      sec.querySelector("#alist").innerHTML=list.map(a=>`
+        <div class="card article-card" data-a="${a.id}">
+          <span class="tag gold">${a.cat}</span>
+          <h3>${esc(a.title)}</h3>
+          <div class="excerpt">${esc(a.excerpt)}</div>
+        </div>`).join("");
+      sec.querySelectorAll("[data-a]").forEach(el=>el.addEventListener("click",()=>renderArticle(el.dataset.a)));
+    }));
+    ac.querySelector("button").classList.add("active");
+    const list=ARTICLES;
+    sec.querySelector("#alist").innerHTML=list.map(a=>`
+      <div class="card article-card" data-a="${a.id}">
+        <span class="tag gold">${a.cat}</span>
+        <h3>${esc(a.title)}</h3>
+        <div class="excerpt">${esc(a.excerpt)}</div>
+      </div>`).join("");
+    sec.querySelectorAll("[data-a]").forEach(el=>el.addEventListener("click",()=>renderArticle(el.dataset.a)));
+    return sec;
+  }
+
+  /* 文章內文 */
+  function renderArticle(id){
+    const a=ARTICLES.find(x=>x.id===id);
+    if(!a){renderArticles();return;}
+    state.route="articles";
+    app.innerHTML="";
+    const sec=document.createElement("div");
+    sec.className="view on";
+    sec.innerHTML=`
+      <div style="margin-bottom:18px"><button class="btn btn-line" id="aback">← 返回文章列表</button></div>
+      <article class="article-body">
+        <span class="tag gold">${a.cat}</span>
+        <h1>${esc(a.title)}</h1>
+        <div class="ameta">${esc(a.excerpt)}</div>
+        ${a.body.map(p=>`<p>${p}</p>`).join("")}
+      </article>`;
+    sec.querySelector("#aback").addEventListener("click",()=>{state.route="articles";location.hash="articles";render();});
+    app.appendChild(sec);
+    window.scrollTo(0,0);
+  }
+
+  /* ================= 每日金句 ================= */
+  function renderGolden(){
+    const sec=document.createElement("div");
+    sec.className="view on";
+    sec.innerHTML=`
+      <h2 class="sec-title">每日金句</h2>
+      <p class="sec-sub">依日期輪換精選經文，也可隨機抽取一句默想。</p>
+      <div style="max-width:720px;margin:0 auto;text-align:center">
+        <div id="goldenBox" class="reader" style="padding:44px 40px"></div>
+        <button class="btn btn-gold" id="gNext" style="margin-top:20px">抽取下一句</button>
+      </div>`;
+    const box=sec.querySelector("#goldenBox");
+    const draw=()=>{
+      const idx=new Date().getDate()%VERSES.length;
+      const v=VERSES[idx];
+      box.innerHTML=`
+        <div style="font-size:2.4rem;color:var(--gold);margin-bottom:10px">"</div>
+        <div style="font-size:1.35rem;font-family:'Noto Serif TC',serif;color:var(--navy);line-height:1.8">「${esc(v.text)}」</div>
+        <div style="margin-top:22px;color:var(--gold);font-weight:700;letter-spacing:.08em">${esc(v.book)} ${esc(v.ref)}</div>`;
+    };
+    draw();
+    sec.querySelector("#gNext").addEventListener("click",()=>{
+      const idx=Math.floor(Math.random()*VERSES.length);
+      const v=VERSES[idx];
+      box.innerHTML=`
+        <div style="font-size:2.4rem;color:var(--gold);margin-bottom:10px">"</div>
+        <div style="font-size:1.35rem;font-family:'Noto Serif TC',serif;color:var(--navy);line-height:1.8">「${esc(v.text)}」</div>
+        <div style="margin-top:22px;color:var(--gold);font-weight:700;letter-spacing:.08em">${esc(v.book)} ${esc(v.ref)}</div>`;
+    });
+    return sec;
+  }
+
+  /* ================= 統計圖表 ================= */
+  function renderStats(){
+    const sec=document.createElement("div");
+    sec.className="view on";
+    const otCh=OT.reduce((s,b)=>s+b.ch,0), ntCh=NT.reduce((s,b)=>s+b.ch,0);
+    const total=otCh+ntCh;
+    sec.innerHTML=`
+      <h2 class="sec-title">聖經數據統計</h2>
+      <p class="sec-sub">以視覺化呈現聖經書卷結構、章節分布與主題。</p>
+      <div class="grid g2">
+        <div class="chart-card"><h3>新舊約章節占比</h3><p>舊約 ${otCh} 章（${Math.round(otCh/total*100)}%）｜新約 ${ntCh} 章（${Math.round(ntCh/total*100)}%）</p><div id="cPie" class="chart-box"></div></div>
+        <div class="chart-card"><h3>十大書卷類別章數</h3><p>各類別包含的章節總數</p><div id="cBar" class="chart-box"></div></div>
+        <div class="chart-card"><h3>各卷章數分布</h3><p>66 卷書的章數（依卷序）</p><div id="cLine" class="chart-box"></div></div>
+        <div class="chart-card"><h3>書卷數量分類</h3><p>各類別包含的書卷數</p><div id="cDonut" class="chart-box"></div></div>
+      </div>`;
+    return sec;
+  }
+  function initCharts(){
+    if(typeof echarts==="undefined"){return;}
+    const otCh=OT.reduce((s,b)=>s+b.ch,0),ntCh=NT.reduce((s,b)=>s+b.ch,0);
+    const pie=echarts.init(document.getElementById("cPie"));
+    pie.setOption({
+      tooltip:{trigger:"item",formatter:"{b}：{c} 章（{d}%）"},
+      series:[{type:"pie",radius:["45%","72%"],avoidLabelOverlap:true,label:{color:"#1f2a44"},itemStyle:{borderColor:"#f7f1e3",borderWidth:2},
+        data:[{value:otCh,name:"舊約",itemStyle:{color:"#2e3d63"}},{value:ntCh,name:"新約",itemStyle:{color:"#b58a3c"}}]}]
+    });
+    const bar=echarts.init(document.getElementById("cBar"));
+    const cats=BOOK_GROUPS.map(g=>g);
+    const catCh=cats.map(g=>ALL_BOOKS.filter(b=>b.grp===g).reduce((s,b)=>s+b.ch,0));
+    bar.setOption({
+      tooltip:{trigger:"axis"},grid:{left:60,right:20,top:20,bottom:40},
+      xAxis:{type:"category",data:cats,axisLabel:{rotate:30,color:"#5b6b7c"}},
+      yAxis:{type:"value",name:"章數",axisLabel:{color:"#5b6b7c"}},
+      series:[{type:"bar",data:catCh,itemStyle:{color:"#2e3d63",borderRadius:[6,6,0,0]},barWidth:"58%"}]
+    });
+    const line=echarts.init(document.getElementById("cLine"));
+    const names=ALL_BOOKS.map(b=>b.name);
+    const chs=ALL_BOOKS.map(b=>b.ch);
+    line.setOption({
+      tooltip:{trigger:"axis"},grid:{left:40,right:20,top:20,bottom:60},
+      xAxis:{type:"category",data:names,axisLabel:{interval:10,color:"#5b6b7c"}},
+      yAxis:{type:"value",name:"章數",axisLabel:{color:"#5b6b7c"}},
+      series:[{type:"line",data:chs,smooth:true,symbol:"none",lineStyle:{color:"#b58a3c",width:2},areaStyle:{color:"rgba(181,138,60,.12)"}}]
+    });
+    const donut=echarts.init(document.getElementById("cDonut"));
+    const catCount=cats.map(g=>ALL_BOOKS.filter(b=>b.grp===g).length);
+    donut.setOption({
+      tooltip:{trigger:"item",formatter:"{b}：{c} 卷（{d}%）"},
+      series:[{type:"pie",radius:["40%","68%"],center:["50%","50%"],label:{color:"#1f2a44"},itemStyle:{borderColor:"#f7f1e3",borderWidth:2},
+        data:cats.map((g,i)=>({name:g,value:catCount[i]}))}]
+    });
+    window.addEventListener("resize",()=>{[pie,bar,line,donut].forEach(c=>c.resize());});
+  }
+
+  /* ================= 我的書籤 ================= */
+  function renderBookmarks(){
+    const sec=document.createElement("div");
+    sec.className="view on";
+    sec.innerHTML=`
+      <h2 class="sec-title">我的書籤</h2>
+      <p class="sec-sub">收藏的書卷與章節，儲存在此瀏覽器中。</p>
+      <div class="bm-list" id="bmlist"></div>`;
+    const bml=sec.querySelector("#bmlist");
+    const bm=getBookmarks().slice().sort((a,b)=>b.ts-a.ts);
+    if(!bm.length){bml.innerHTML=`<div class="empty">尚無書籤。在章節閱讀器中點「收藏本章」即可加入。</div>`;return sec;}
+    bml.innerHTML=bm.map((x,i)=>`
+      <div class="bm-item">
+        <div>
+          <div class="bmtitle">${x.book} 第 ${x.ch} 章</div>
+          <div class="bmmeta">${new Date(x.ts).toLocaleDateString("zh-TW")} 收藏</div>
+        </div>
+        <div style="display:flex;gap:8px">
+          <button class="btn btn-navy" data-open="${i}" style="margin:0;padding:7px 14px;font-size:.86rem">閱讀</button>
+          <button data-del="${i}" style="margin:0">移除</button>
+        </div>
+      </div>`).join("");
+    bml.querySelectorAll("[data-open]").forEach(el=>el.addEventListener("click",()=>{
+      const x=bm[+el.dataset.open];go("reader",{book:x.book,chap:x.chap});
+    }));
+    bml.querySelectorAll("[data-del]").forEach(el=>el.addEventListener("click",()=>{
+      const x=bm[+el.dataset.del];
+      const idx=getBookmarks().findIndex(y=>y.key===x.key);
+      if(idx>-1)getBookmarks().splice(idx,1);saveBookmarks();renderBookmarks();
+    }));
+    return sec;
+  }
+
+  /* ---------- 頂欄搜尋 ---------- */
+  function bindNavSearch(){
+    const inp=$("navSearchInput"),btn=$("navSearchBtn");
+    const run=()=>{const q=inp.value.trim();if(q){state.searchQ=q;state.route="search";location.hash="search";render();inp.blur();}};
+    btn.addEventListener("click",run);
+    inp.addEventListener("keydown",e=>{if(e.key==="Enter")run();});
+  }
+
+  /* ---------- 啟動 ---------- */
+  renderNav();
+  bindNavSearch();
+  render();
+})();
+</script>
+</body>
+</html>
